@@ -12,113 +12,100 @@
     <style>
         :root { --neon: #00f2ff; --dark: #020408; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--dark); color: white; overflow-x: hidden; scroll-behavior: smooth; }
-        .glass { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 2rem; }
-        .neon-glow { border: 1px solid rgba(0, 242, 255, 0.2); transition: 0.5s; }
-        .neon-glow:hover { border-color: var(--neon); box-shadow: 0 0 30px rgba(0, 242, 255, 0.2); }
+        .glass { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(25px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 2rem; }
+        .neon-border { border: 1px solid rgba(0, 242, 255, 0.2); transition: 0.5s; }
+        .neon-border:hover { border-color: var(--neon); box-shadow: 0 0 30px rgba(0, 242, 255, 0.2); }
         .step { display: none; }
-        .step.active { display: block; animation: fadeInUp 0.6s ease forwards; }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        .progress-fill { height: 100%; background: linear-gradient(90deg, #00f2ff, #0061ff); width: 15%; transition: 0.8s ease; }
+        .step.active { display: block; animation: fadeInUp 0.5s ease forwards; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         .btn-opt { width: 100%; padding: 1.25rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 1.5rem; text-align: left; transition: 0.3s; display: flex; justify-content: space-between; align-items: center; }
         .btn-opt:hover { background: rgba(0, 242, 255, 0.1); border-color: var(--neon); transform: scale(1.02); }
-        input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; }
-        input[type=range]::-webkit-slider-runnable-track { height: 8px; background: rgba(255,255,255,0.1); border-radius: 5px; }
-        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 24px; width: 24px; border-radius: 50%; background: var(--neon); cursor: pointer; margin-top: -8px; box-shadow: 0 0 15px var(--neon); }
+        input, select { background: rgba(255,255,255,0.05) !important; border: 1px solid rgba(255,255,255,0.1) !important; color: white !important; outline: none; transition: 0.3s; }
+        input:focus { border-color: var(--neon) !important; box-shadow: 0 0 15px rgba(0, 242, 255, 0.1); }
     </style>
 </head>
-<body>
+<body class="pb-20">
 
-    <nav class="sticky top-0 z-50 p-6">
-        <div class="max-w-7xl mx-auto glass px-8 py-4 flex justify-between items-center neon-glow">
-            <div class="flex flex-col">
-                <span class="text-2xl font-black tracking-tighter italic">U.S. HOME IMPROVEMENTS</span>
-                <span class="text-[8px] text-cyan-400 font-bold uppercase tracking-[0.4em]">National Qualified Network</span>
-            </div>
-            <a href="#portal" class="bg-cyan-600 px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest">Get Free Quotes</a>
+    <nav class="p-6">
+        <div class="max-w-7xl mx-auto glass px-8 py-4 flex justify-between items-center neon-border">
+            <div class="leading-none"><span class="text-2xl font-black italic tracking-tighter">U.S. HOME IMPROVEMENTS</span><br><span class="text-[7px] text-cyan-400 font-bold uppercase tracking-[0.5em]">Licensed Contractor Network</span></div>
         </div>
     </nav>
 
-    <section id="portal" class="max-w-xl mx-auto px-6 py-10">
-        <div class="mb-8">
-            <div class="flex justify-between text-[10px] font-bold text-cyan-500 uppercase tracking-widest mb-2">
-                <span id="stepLabel">Project Selection</span>
-                <span id="stepCount">Step 1 of 6</span>
-            </div>
-            <div class="h-1.5 bg-white/5 rounded-full overflow-hidden"><div class="progress-fill" id="fillBar"></div></div>
-        </div>
-
-        <div class="glass p-8 md:p-10 neon-glow">
+    <section id="portal" class="max-w-2xl mx-auto px-6 mt-10">
+        <div class="glass p-8 md:p-12 neon-border">
             <form id="masterForm">
+                
                 <div class="step active" id="step1">
-                    <h2 class="text-2xl font-black mb-6 uppercase italic">01. What is your project?</h2>
+                    <h2 class="text-3xl font-black mb-6 uppercase italic text-cyan-400">Project Type</h2>
                     <div class="space-y-3">
-                        <button type="button" onclick="next(2, 'service', 'Windows')" class="btn-opt"><span>🪟 Windows & Doors</span> <span>→</span></button>
+                        <button type="button" onclick="handleService('Windows')" class="btn-opt"><span>🪟 Windows & Doors</span> <span>→</span></button>
                         <button type="button" onclick="next(2, 'service', 'Roofing')" class="btn-opt"><span>🏠 Roofing & Gutters</span> <span>→</span></button>
                         <button type="button" onclick="next(2, 'service', 'Solar')" class="btn-opt"><span>☀️ Solar Energy</span> <span>→</span></button>
                     </div>
                 </div>
 
-                <div class="step" id="step2">
-                    <h2 class="text-2xl font-black mb-2 uppercase italic text-center">02. Credit Score</h2>
-                    <div class="text-center py-6">
-                        <span id="scoreVal" class="text-6xl font-black text-cyan-400">700</span>
-                        <p class="text-xs text-gray-500 mt-4 font-bold uppercase tracking-widest" id="scoreGrade">Excellent</p>
+                <div class="step" id="step-windows">
+                    <h2 class="text-3xl font-black mb-6 uppercase italic text-cyan-400">Window Count</h2>
+                    <p class="text-gray-500 text-xs mb-6">How many units do you need replaced?</p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <button type="button" onclick="next(3, 'units', '1-5')" class="btn-opt"><span>1-5 Units</span></button>
+                        <button type="button" onclick="next(3, 'units', '6-10')" class="btn-opt"><span>6-10 Units</span></button>
+                        <button type="button" onclick="next(3, 'units', '11-20')" class="btn-opt"><span>11-20 Units</span></button>
+                        <button type="button" onclick="next(3, 'units', '20+')" class="btn-opt"><span>20+ Units</span></button>
                     </div>
-                    <input type="range" min="300" max="850" value="700" step="10" oninput="updateScore(this.value)" class="mb-10">
-                    <button type="button" onclick="next(3, 'credit', document.getElementById('scoreVal').innerText)" class="w-full bg-cyan-600 p-5 rounded-2xl font-black uppercase">Next Step</button>
                 </div>
 
                 <div class="step" id="step3">
-                    <h2 class="text-2xl font-black mb-8 uppercase italic">03. Property Owner?</h2>
+                    <h2 class="text-3xl font-black mb-6 uppercase italic text-cyan-400">Timeline</h2>
                     <div class="space-y-3">
-                        <button type="button" onclick="next(4, 'ownership', 'Owner')" class="btn-opt"><span>🏠 Yes, I am the owner</span> <span>→</span></button>
-                        <button type="button" onclick="next(4, 'ownership', 'Renter')" class="btn-opt"><span>🏢 No, I am renting</span> <span>→</span></button>
+                        <button type="button" onclick="next(4, 'time', 'ASAP / Urgent')" class="btn-opt"><span>🚀 ASAP (Ready to Start)</span></button>
+                        <button type="button" onclick="next(4, 'time', 'Within 1 Month')" class="btn-opt"><span>📅 Within 30 Days</span></button>
+                        <button type="button" onclick="next(4, 'time', 'Just Estimates')" class="btn-opt"><span>🔍 Getting Estimates</span></button>
                     </div>
                 </div>
 
                 <div class="step" id="step4">
-                    <h2 class="text-2xl font-black mb-8 uppercase italic">04. Timeframe</h2>
-                    <div class="space-y-3">
-                        <button type="button" onclick="next(5, 'time', 'Immediately')" class="btn-opt"><span>🚀 Immediately</span> <span>→</span></button>
-                        <button type="button" onclick="next(5, 'time', '1-3 Months')" class="btn-opt"><span>📅 1-3 Months</span> <span>→</span></button>
+                    <h2 class="text-3xl font-black mb-6 uppercase italic text-cyan-400">Property Details</h2>
+                    <input type="text" id="address" placeholder="Street Address" class="w-full p-5 rounded-2xl mb-4">
+                    <div class="grid grid-cols-2 gap-4 mb-8">
+                        <input type="text" id="city" placeholder="City" class="p-5 rounded-2xl">
+                        <input type="number" id="zip" placeholder="Zip Code" class="p-5 rounded-2xl">
                     </div>
+                    <button type="button" onclick="next(5)" class="w-full bg-cyan-600 p-5 rounded-2xl font-black uppercase shadow-lg shadow-cyan-900/40">Verify Address</button>
                 </div>
 
                 <div class="step" id="step5">
-                    <h2 class="text-2xl font-black mb-6 italic uppercase text-cyan-400">05. Zip Code</h2>
-                    <input type="number" id="zip" placeholder="Zip Code" class="w-full p-6 bg-white/5 border border-white/10 rounded-2xl mb-8 outline-none text-2xl font-bold">
-                    <button type="button" onclick="next(6)" class="w-full bg-cyan-600 p-5 rounded-2xl font-black uppercase">Check Coverage</button>
-                </div>
-
-                <div class="step" id="step6">
-                    <h2 class="text-2xl font-black mb-6 italic text-cyan-400 uppercase">06. Final Verification</h2>
-                    <input type="text" id="name" placeholder="Full Name" class="w-full p-5 bg-white/5 border border-white/10 rounded-2xl outline-none mb-4">
-                    <input type="tel" id="phone" placeholder="Mobile Number" class="w-full p-5 bg-white/5 border border-white/10 rounded-2xl outline-none mb-10">
-                    <button type="submit" class="w-full bg-green-600 p-5 rounded-2xl font-black uppercase">Get My Free Quotes</button>
+                    <h2 class="text-3xl font-black mb-6 uppercase italic text-cyan-400">Owner Identity</h2>
+                    <div class="space-y-4">
+                        <input type="text" id="name" placeholder="Full Name" class="w-full p-5 rounded-2xl">
+                        <input type="email" id="email" placeholder="Email Address" class="w-full p-5 rounded-2xl">
+                        <input type="tel" id="phone" placeholder="Mobile Number" class="w-full p-5 rounded-2xl">
+                        <button type="submit" class="w-full bg-green-600 p-6 rounded-2xl font-black uppercase text-xl mt-4">Submit Application</button>
+                    </div>
                 </div>
             </form>
         </div>
     </section>
 
-    <div id="adminPortal" class="fixed inset-0 z-[200] bg-black/95 backdrop-blur-xl p-6 hidden overflow-y-auto">
-        <div class="max-w-3xl mx-auto pt-10">
+    <div id="adminPortal" class="fixed inset-0 z-[200] bg-black/98 backdrop-blur-3xl p-6 hidden overflow-y-auto">
+        <div class="max-w-5xl mx-auto pt-10">
             <div class="flex justify-between items-center mb-10">
-                <h2 class="text-3xl font-black italic text-cyan-400">ADMIN DASHBOARD</h2>
-                <button onclick="location.reload()" class="text-gray-500 font-bold uppercase text-xs">Exit</button>
+                <h2 class="text-4xl font-black italic text-cyan-400 tracking-tighter">LEAD CONTROL CENTER</h2>
+                <button onclick="location.reload()" class="bg-white/10 px-6 py-2 rounded-full font-bold">CLOSE</button>
             </div>
-            <div id="loginBox">
-                <input type="password" id="adminKey" placeholder="Secret Key" class="w-full p-6 bg-white/5 border border-white/10 rounded-2xl outline-none text-center text-2xl tracking-[0.5em] mb-6">
-                <button onclick="unlock()" class="w-full bg-cyan-600 p-5 rounded-2xl font-black uppercase">Unlock Leads</button>
+            
+            <div id="loginBox" class="max-w-md mx-auto text-center">
+                <input type="password" id="adminKey" placeholder="Secret Key" class="w-full p-6 rounded-2xl text-center text-3xl tracking-[0.5em] mb-6">
+                <button onclick="unlock()" class="w-full bg-cyan-600 p-5 rounded-2xl font-black uppercase">Authorize Access</button>
             </div>
-            <div id="leadsContainer" class="hidden space-y-4">
-                <p class="text-cyan-500 animate-pulse font-bold uppercase tracking-widest text-xs">Syncing Live Leads...</p>
-                <div id="leadsList"></div>
-            </div>
+
+            <div id="leadsDashboard" class="hidden grid gap-6" id="leadsList">
+                </div>
         </div>
     </div>
 
     <script>
-        // FIREBASE CONFIG
         const firebaseConfig = {
             apiKey: "AIzaSyAoQYMhsYLeRaLTkM03T0mOpOK8iXJPatA",
             authDomain: "ushomes07.firebaseapp.com",
@@ -133,66 +120,100 @@
 
         let leadData = {};
 
-        function updateScore(v) {
-            document.getElementById('scoreVal').innerText = v;
-            document.getElementById('scoreGrade').innerText = v > 740 ? "Excellent 💎" : v > 670 ? "Good ✅" : "Fair ⚠️";
+        function handleService(val) {
+            leadData.service = val;
+            if(val === 'Windows') {
+                showStep('step-windows');
+            } else {
+                next(3);
+            }
+        }
+
+        function showStep(id) {
+            document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
         }
 
         function next(s, k, v) {
             if(k) leadData[k] = v;
-            document.getElementById('fillBar').style.width = (s/6)*100 + '%';
-            document.getElementById('stepCount').innerText = `Step ${s} of 6`;
-            document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
-            document.getElementById('step' + s).classList.add('active');
+            showStep('step' + s);
         }
 
         document.getElementById('masterForm').addEventListener('submit', (e) => {
             e.preventDefault();
             leadData.name = document.getElementById('name').value;
+            leadData.email = document.getElementById('email').value;
             leadData.phone = document.getElementById('phone').value;
+            leadData.address = `${document.getElementById('address').value}, ${document.getElementById('city').value}`;
             leadData.zip = document.getElementById('zip').value;
             leadData.timestamp = new Date().toLocaleString();
 
             db.ref('leads').push(leadData).then(() => {
-                alert("Success sweetie! Your request is submitted. 🚀");
+                alert("Application Submitted Sweetie! 🚀");
                 location.reload();
             });
         });
 
-        // Tap-Tap Admin Secret (5 fast clicks)
-        let t = 0, l = 0;
+        // ADMIN LOGIC
+        let clicks = 0;
         document.addEventListener('click', () => {
-            if(Date.now() - l < 400) t++; else t = 1;
-            l = Date.now();
-            if(t === 5) { document.getElementById('adminPortal').classList.remove('hidden'); t = 0; }
+            clicks++;
+            setTimeout(() => clicks = 0, 2000);
+            if(clicks === 5) document.getElementById('adminPortal').classList.remove('hidden');
         });
 
         function unlock() {
             if(document.getElementById('adminKey').value === "ADMIN@786#") {
                 document.getElementById('loginBox').classList.add('hidden');
-                document.getElementById('leadsContainer').classList.remove('hidden');
-                
-                db.ref('leads').on('value', (snap) => {
-                    const data = snap.val();
-                    let html = '';
-                    for(let id in data) {
-                        html = `
-                        <div class="glass p-6 border-l-4 border-cyan-500 mb-4">
-                            <div class="flex justify-between items-start mb-2">
-                                <p class="font-black text-xl italic">${data[id].name}</p>
-                                <span class="text-[10px] bg-cyan-900/50 px-3 py-1 rounded-full text-cyan-400 font-bold">${data[id].service}</span>
+                document.getElementById('leadsDashboard').classList.remove('hidden');
+                loadLeads();
+            } else { alert("WRONG KEY!"); }
+        }
+
+        function loadLeads() {
+            db.ref('leads').on('value', (snap) => {
+                const data = snap.val();
+                let html = '';
+                for(let id in data) {
+                    html = `
+                    <div class="glass p-6 border-l-4 border-cyan-500 relative group">
+                        <div class="flex justify-between mb-4">
+                            <div>
+                                <p class="text-2xl font-black italic">${data[id].name}</p>
+                                <p class="text-cyan-400 font-bold uppercase text-xs">${data[id].service} | ${data[id].time}</p>
                             </div>
-                            <p class="text-sm text-gray-400">📞 ${data[id].phone} | 📍 ${data[id].zip}</p>
-                            <div class="mt-4 flex gap-4 text-[9px] uppercase font-bold text-gray-500 tracking-widest">
-                                <span>Credit: ${data[id].credit}</span>
-                                <span>Owner: ${data[id].ownership}</span>
-                                <span>Time: ${data[id].time}</span>
+                            <div class="flex gap-2">
+                                <button onclick="copyLead('${id}')" class="bg-blue-600 px-3 py-1 rounded text-[10px] font-bold">COPY</button>
+                                <button onclick="deleteLead('${id}')" class="bg-red-600 px-3 py-1 rounded text-[10px] font-bold">DELETE</button>
                             </div>
-                        </div>` + html;
-                    }
-                    document.getElementById('leadsList').innerHTML = html || '<p class="text-gray-600">No leads yet, sweetie.</p>';
-                });
-            } else { alert("ACCESS DENIED!"); }
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-2 text-sm text-gray-400">
+                            <p>📞 ${data[id].phone}</p>
+                            <p>📧 ${data[id].email}</p>
+                            <p class="col-span-2">📍 ${data[id].address} (Zip: ${data[id].zip})</p>
+                        </div>
+                        ${data[id].units ? `<p class="mt-2 text-xs text-yellow-500 font-bold">Windows: ${data[id].units} Units</p>` : ''}
+                        <p class="mt-4 text-[9px] text-gray-600 uppercase tracking-widest">${data[id].timestamp}</p>
+                        <textarea id="copy-${id}" class="hidden">Name: ${data[id].name}\nPhone: ${data[id].phone}\nEmail: ${data[id].email}\nAddress: ${data[id].address}\nService: ${data[id].service}\nTime: ${data[id].time}</textarea>
+                    </div>` + html;
+                }
+                document.getElementById('leadsDashboard').innerHTML = html || '<p class="text-center text-gray-600">No leads found.</p>';
+            });
+        }
+
+        function copyLead(id) {
+            const text = document.getElementById('copy-' + id);
+            text.classList.remove('hidden');
+            text.select();
+            document.execCommand('copy');
+            text.classList.add('hidden');
+            alert("Lead Data Copied to Clipboard!");
+        }
+
+        function deleteLead(id) {
+            if(confirm("Are you sure you want to delete this lead?")) {
+                db.ref('leads/' + id).remove();
+            }
         }
     </script>
 </body>
