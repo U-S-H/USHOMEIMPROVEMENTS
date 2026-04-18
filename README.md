@@ -2,159 +2,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>U.S. HOME IMPROVEMENTS | Premium Contractor Network</title>
+    <title>U.S. HOME IMPROVEMENTS | Official National Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;600;800&display=swap" rel="stylesheet">
     
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 
     <style>
-        :root { --neon: #00f2ff; --dark: #020408; }
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background: var(--dark); 
-            color: white; 
-            overflow-x: hidden; 
-            scroll-behavior: smooth; 
-        }
+        :root { --neon: #00f2ff; --dark: #010204; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--dark); color: white; scroll-behavior: smooth; }
         
-        /* Premium Background Blobs */
-        .blob { position: absolute; width: 500px; height: 500px; background: rgba(0, 242, 255, 0.05); filter: blur(120px); border-radius: 50%; z-index: -1; }
-        
-        .glass { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(30px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 2.5rem; }
-        .neon-glow { border: 1px solid rgba(0, 242, 255, 0.2); transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
-        .neon-glow:hover { border-color: var(--neon); box-shadow: 0 0 40px rgba(0, 242, 255, 0.2); transform: translateY(-2px); }
+        .glass { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(25px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .neon-glow { border: 1px solid rgba(0, 242, 255, 0.15); transition: 0.5s; }
+        .neon-glow:hover { border-color: var(--neon); box-shadow: 0 0 40px rgba(0, 242, 255, 0.2); }
 
         .step { display: none; }
-        .step.active { display: block; animation: fadeInUp 0.6s cubic-bezier(0.19, 1, 0.22, 1) forwards; }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .step.active { display: block; animation: slideUp 0.6s cubic-bezier(0.19, 1, 0.22, 1) forwards; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
 
-        .btn-opt { 
-            width: 100%; padding: 1.5rem; background: rgba(255,255,255,0.03); 
-            border: 1px solid rgba(255,255,255,0.05); border-radius: 1.5rem; 
-            text-align: left; transition: 0.3s; display: flex; justify-content: space-between; align-items: center; 
-        }
+        .btn-opt { width: 100%; padding: 1.25rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 1.25rem; transition: 0.3s; display: flex; justify-content: space-between; align-items: center; }
         .btn-opt:hover { background: rgba(0, 242, 255, 0.1); border-color: var(--neon); transform: scale(1.02); }
 
-        input, select { background: rgba(255,255,255,0.05) !important; border: 1px solid rgba(255,255,255,0.1) !important; color: white !important; outline: none; }
-        input:focus { border-color: var(--neon) !important; box-shadow: 0 0 15px rgba(0, 242, 255, 0.1); }
-        
-        /* Custom Scrollbar for Admin */
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-thumb { background: var(--neon); border-radius: 10px; }
+        .feature-card img { transition: 0.8s ease; }
+        .feature-card:hover img { transform: scale(1.1); }
+
+        input { background: rgba(255,255,255,0.05) !important; border: 1px solid rgba(255,255,255,0.1) !important; color: white !important; outline: none; padding: 1.2rem; border-radius: 1rem; }
+        input:focus { border-color: var(--neon) !important; }
     </style>
 </head>
-<body class="pb-10">
+<body class="overflow-x-hidden">
 
-    <div class="blob" style="top: -100px; left: -100px;"></div>
-    <div class="blob" style="bottom: -100px; right: -100px; background: rgba(0, 97, 255, 0.05);"></div>
-
-    <nav class="p-6">
-        <div class="max-w-7xl mx-auto glass px-8 py-4 flex justify-between items-center neon-glow">
-            <div class="leading-none">
+    <nav class="fixed top-0 w-full z-[100] p-4">
+        <div class="max-w-7xl mx-auto glass rounded-3xl px-8 py-4 flex justify-between items-center neon-glow">
+            <div>
                 <span class="text-2xl font-black italic tracking-tighter">U.S. HOME IMPROVEMENTS</span>
-                <p class="text-[7px] text-cyan-400 font-bold uppercase tracking-[0.5em] mt-1">Certified National Contractor Network</p>
+                <p class="text-[7px] text-cyan-400 font-bold uppercase tracking-[0.4em]">Official Contractor Matrix</p>
             </div>
-            <div class="hidden md:block text-[10px] font-black uppercase tracking-widest text-gray-500">Secure SSL Encrypted Portal</div>
+            <a href="#portal" class="hidden md:block bg-cyan-600 px-6 py-2 rounded-full text-[10px] font-black uppercase hover:bg-cyan-400 transition">Get Started</a>
         </div>
     </nav>
 
-    <section id="portal" class="max-w-2xl mx-auto px-6 mt-10">
-        <div class="glass p-10 md:p-14 neon-glow relative overflow-hidden">
-            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-50"></div>
-            
+    <header class="pt-40 pb-20 text-center px-6">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-6xl md:text-8xl font-black mb-6 tracking-tighter leading-none italic">WE BUILD THE<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">FUTURE OF HOMES.</span></h1>
+            <p class="text-gray-500 text-lg uppercase tracking-widest font-light">Windows • Roofing • Solar • Remodeling</p>
+        </div>
+    </header>
+
+    <section id="portal" class="max-w-2xl mx-auto px-6 py-10 mb-20">
+        <div class="glass p-10 md:p-14 rounded-[3rem] neon-glow relative">
+            <div class="absolute -top-4 -left-4 bg-cyan-600 px-4 py-1 rounded-lg text-[10px] font-black italic uppercase">Qualified Enrollment</div>
             <form id="masterForm">
+                
                 <div class="step active" id="step1">
-                    <h2 class="text-3xl font-black mb-2 uppercase italic">01. Project Type</h2>
-                    <p class="text-gray-500 text-xs mb-10 uppercase tracking-widest font-bold">Select the service you need</p>
+                    <h2 class="text-3xl font-black mb-8 italic">Choose Your Service</h2>
                     <div class="space-y-4">
-                        <button type="button" onclick="handleService('Windows')" class="btn-opt group">
-                            <span class="font-bold">🪟 WINDOWS & DOORS</span> 
-                            <span class="opacity-0 group-hover:opacity-100 transition text-cyan-400">SELECT →</span>
-                        </button>
-                        <button type="button" onclick="next(3, 'service', 'Roofing')" class="btn-opt group">
-                            <span class="font-bold">🏠 ROOFING & GUTTERS</span> 
-                            <span class="opacity-0 group-hover:opacity-100 transition text-cyan-400">SELECT →</span>
-                        </button>
-                        <button type="button" onclick="next(3, 'service', 'Solar')" class="btn-opt group">
-                            <span class="font-bold">☀️ SOLAR ENERGY</span> 
-                            <span class="opacity-0 group-hover:opacity-100 transition text-cyan-400">SELECT →</span>
-                        </button>
+                        <button type="button" onclick="handleService('Windows')" class="btn-opt font-bold"><span>🪟 Replacement Windows</span> <span>→</span></button>
+                        <button type="button" onclick="next(3, 'service', 'Roofing')" class="btn-opt font-bold"><span>🏠 Premium Roofing</span> <span>→</span></button>
+                        <button type="button" onclick="next(3, 'service', 'Solar')" class="btn-opt font-bold"><span>☀️ Solar Energy Matrix</span> <span>→</span></button>
                     </div>
                 </div>
 
                 <div class="step" id="step-windows">
-                    <h2 class="text-3xl font-black mb-2 uppercase italic text-cyan-400">02. Quantity</h2>
-                    <p class="text-gray-500 text-xs mb-10 uppercase tracking-widest font-bold">How many windows need replacement?</p>
+                    <h2 class="text-3xl font-black mb-8 italic">Project Scale</h2>
+                    <p class="text-gray-500 text-xs mb-6 uppercase tracking-widest">How many windows?</p>
                     <div class="grid grid-cols-2 gap-4">
-                        <button type="button" onclick="next(3, 'units', '1-5')" class="btn-opt text-center justify-center">1-5 Units</button>
-                        <button type="button" onclick="next(3, 'units', '6-10')" class="btn-opt text-center justify-center">6-10 Units</button>
-                        <button type="button" onclick="next(3, 'units', '11-20')" class="btn-opt text-center justify-center">11-20 Units</button>
-                        <button type="button" onclick="next(3, 'units', '20+')" class="btn-opt text-center justify-center">20+ Units</button>
+                        <button type="button" onclick="next(3, 'units', '3-5 Units')" class="btn-opt justify-center">3-5 Units</button>
+                        <button type="button" onclick="next(3, 'units', '6-10 Units')" class="btn-opt justify-center">6-10 Units</button>
+                        <button type="button" onclick="next(3, 'units', '11-20 Units')" class="btn-opt justify-center">11-20 Units</button>
+                        <button type="button" onclick="next(3, 'units', '20+ Units')" class="btn-opt justify-center">20+ Units</button>
                     </div>
                 </div>
 
                 <div class="step" id="step3">
-                    <h2 class="text-3xl font-black mb-2 uppercase italic text-cyan-400">03. Timeline</h2>
-                    <p class="text-gray-500 text-xs mb-10 uppercase tracking-widest font-bold">When should we start?</p>
+                    <h2 class="text-3xl font-black mb-8 italic">Timeframe</h2>
                     <div class="space-y-4">
-                        <button type="button" onclick="next(4, 'time', 'ASAP / Urgent')" class="btn-opt"><span>🚀 ASAP (READY TO START)</span></button>
-                        <button type="button" onclick="next(4, 'time', 'Within 30 Days')" class="btn-opt"><span>📅 WITHIN 30 DAYS</span></button>
-                        <button type="button" onclick="next(4, 'time', 'Just Estimates')" class="btn-opt"><span>🔍 JUST GETTING ESTIMATES</span></button>
+                        <button type="button" onclick="next(4, 'time', 'Urgent / ASAP')" class="btn-opt font-bold text-cyan-400"><span>🚀 ASAP (Ready to Start)</span></button>
+                        <button type="button" onclick="next(4, 'time', '1-3 Months')" class="btn-opt font-bold"><span>📅 Within 3 Months</span></button>
+                        <button type="button" onclick="next(4, 'time', 'Just Estimates')" class="btn-opt font-bold"><span>🔍 Getting Estimates</span></button>
                     </div>
                 </div>
 
                 <div class="step" id="step4">
-                    <h2 class="text-3xl font-black mb-2 uppercase italic text-cyan-400">04. Location</h2>
-                    <p class="text-gray-500 text-xs mb-10 uppercase tracking-widest font-bold">Property address verification</p>
-                    <input type="text" id="address" placeholder="Street Address" class="w-full p-6 rounded-2xl mb-4 font-bold">
-                    <div class="grid grid-cols-2 gap-4 mb-10">
-                        <input type="text" id="city" placeholder="City" class="p-6 rounded-2xl font-bold">
-                        <input type="number" id="zip" placeholder="Zip Code" class="p-6 rounded-2xl font-bold">
-                    </div>
-                    <button type="button" onclick="next(5)" class="w-full bg-cyan-600 p-6 rounded-2xl font-black uppercase tracking-widest shadow-xl">Confirm Address</button>
-                </div>
-
-                <div class="step" id="step5">
-                    <h2 class="text-3xl font-black mb-2 uppercase italic text-cyan-400">05. Ownership</h2>
-                    <p class="text-gray-500 text-xs mb-10 uppercase tracking-widest font-bold">Final verification details</p>
+                    <h2 class="text-3xl font-black mb-8 italic">Verification</h2>
                     <div class="space-y-4">
-                        <input type="text" id="name" placeholder="Full Name" class="w-full p-6 rounded-2xl font-bold">
-                        <input type="email" id="email" placeholder="Email Address" class="w-full p-6 rounded-2xl font-bold">
-                        <input type="tel" id="phone" placeholder="Mobile Number" class="w-full p-6 rounded-2xl font-bold">
-                        <button type="submit" class="w-full bg-green-600 p-6 rounded-2xl font-black uppercase text-xl mt-6 shadow-2xl shadow-green-900/40">Secure My Quotes</button>
+                        <input type="text" id="name" placeholder="Full Name" class="w-full font-bold">
+                        <input type="tel" id="phone" placeholder="Phone Number" class="w-full font-bold">
+                        <input type="email" id="email" placeholder="Email Address" class="w-full font-bold">
+                        <input type="text" id="address" placeholder="Street Address" class="w-full font-bold">
+                        <div class="grid grid-cols-2 gap-4">
+                            <input type="text" id="city" placeholder="City" class="font-bold">
+                            <input type="number" id="zip" placeholder="Zip" class="font-bold">
+                        </div>
+                        <button type="submit" class="w-full bg-green-600 p-6 rounded-2xl font-black uppercase text-xl shadow-2xl shadow-green-900/40 mt-4">Submit for Approval</button>
                     </div>
                 </div>
             </form>
         </div>
     </section>
 
-    <div id="adminPortal" class="fixed inset-0 z-[500] bg-black/98 backdrop-blur-3xl p-6 hidden overflow-y-auto">
-        <div class="max-w-6xl mx-auto pt-10 pb-20">
-            <div class="flex justify-between items-center mb-16 border-b border-white/10 pb-8">
-                <div>
-                    <h2 class="text-5xl font-black italic tracking-tighter text-cyan-400">CENTRAL COMMAND</h2>
-                    <p class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.5em]">Global Lead Management System</p>
+    <section class="max-w-7xl mx-auto px-6 py-20">
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="glass rounded-[2rem] overflow-hidden feature-card neon-glow">
+                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80" class="w-full h-64 object-cover">
+                <div class="p-8">
+                    <h3 class="text-xl font-black italic mb-2 uppercase">Windows & Doors</h3>
+                    <p class="text-xs text-gray-500 font-bold uppercase tracking-widest leading-loose">Energy efficient vinyl & wood solutions designed for the American climate.</p>
                 </div>
-                <button onclick="location.reload()" class="bg-white/5 border border-white/10 px-8 py-3 rounded-full font-black text-xs uppercase hover:bg-red-600 transition">Terminate Session</button>
+            </div>
+            <div class="glass rounded-[2rem] overflow-hidden feature-card neon-glow">
+                <img src="https://images.unsplash.com/photo-1513694490325-24b3dc52a21c?auto=format&fit=crop&w=600&q=80" class="w-full h-64 object-cover">
+                <div class="p-8">
+                    <h3 class="text-xl font-black italic mb-2 uppercase">Solar Systems</h3>
+                    <p class="text-xs text-gray-500 font-bold uppercase tracking-widest leading-loose">Reduce your bill to zero. Government backed solar programs for owners.</p>
+                </div>
+            </div>
+            <div class="glass rounded-[2rem] overflow-hidden feature-card neon-glow">
+                <img src="https://images.unsplash.com/photo-1632759162353-19c9a543fe79?auto=format&fit=crop&w=600&q=80" class="w-full h-64 object-cover">
+                <div class="p-8">
+                    <h3 class="text-xl font-black italic mb-2 uppercase">Roofing Elite</h3>
+                    <p class="text-xs text-gray-500 font-bold uppercase tracking-widest leading-loose">Lifetime warranty architectural shingles and metal roofing systems.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="adminPortal" class="fixed inset-0 z-[500] bg-black/98 backdrop-blur-3xl p-6 hidden overflow-y-auto">
+        <div class="max-w-6xl mx-auto pt-10">
+            <div class="flex justify-between items-center mb-10 border-b border-white/10 pb-8">
+                <h2 class="text-4xl font-black italic text-cyan-400">LEAD CONTROL CENTER</h2>
+                <button onclick="location.reload()" class="bg-red-600 px-4 py-2 rounded-xl text-[10px] font-bold">LOGOUT</button>
             </div>
             
             <div id="loginBox" class="max-w-md mx-auto py-20">
-                <p class="text-center text-gray-600 uppercase text-[10px] font-bold tracking-[0.3em] mb-6">Enter Authorization Key</p>
-                <input type="password" id="adminKey" class="w-full p-8 rounded-3xl bg-white/5 border border-white/10 text-center text-4xl tracking-[0.5em] focus:border-cyan-500 mb-8 outline-none">
-                <button onclick="unlock()" class="w-full bg-cyan-600 p-6 rounded-3xl font-black uppercase text-lg">Grant Access</button>
+                <input type="password" id="adminKey" placeholder="Access Key" class="w-full p-6 bg-white/5 border border-white/10 rounded-2xl text-center text-4xl tracking-[0.4em] mb-6">
+                <button onclick="unlock()" class="w-full bg-cyan-600 p-5 rounded-2xl font-black uppercase tracking-widest">Authorize Access</button>
             </div>
 
-            <div id="leadsDashboard" class="hidden">
-                <div class="grid md:grid-cols-2 gap-6" id="leadsList">
-                    </div>
-            </div>
+            <div id="dashboard" class="hidden grid gap-6" id="leadsList">
+                </div>
         </div>
     </div>
 
+    <footer class="py-20 text-center border-t border-white/5 mt-20">
+        <p class="text-2xl font-black italic mb-4">U.S. HOME IMPROVEMENTS</p>
+        <p class="text-[8px] text-gray-600 uppercase tracking-[0.5em] mb-8 font-bold">Licensed • Bonded • Insured | © 2026 National HQ</p>
+    </footer>
+
     <script>
-        // FIREBASE INITIALIZATION
+        // FIREBASE SETUP
         const firebaseConfig = {
             apiKey: "AIzaSyAoQYMhsYLeRaLTkM03T0mOpOK8iXJPatA",
             authDomain: "ushomes07.firebaseapp.com",
@@ -167,110 +164,87 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
 
-        let leadData = { units: "N/A" };
+        let leadData = { units: 'N/A' };
 
+        // Form Logic
         function handleService(val) {
             leadData.service = val;
             if(val === 'Windows') {
-                showStep('step-windows');
+                document.getElementById('step1').classList.remove('active');
+                document.getElementById('step-windows').classList.add('active');
             } else {
                 next(3);
             }
         }
 
-        function showStep(id) {
-            document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            window.scrollTo(0, 0);
-        }
-
         function next(s, k, v) {
             if(k) leadData[k] = v;
-            showStep('step' + s);
+            document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+            document.getElementById('step' + s).classList.add('active');
         }
 
         document.getElementById('masterForm').addEventListener('submit', (e) => {
             e.preventDefault();
             leadData.name = document.getElementById('name').value;
-            leadData.email = document.getElementById('email').value;
             leadData.phone = document.getElementById('phone').value;
-            leadData.address = `${document.getElementById('address').value}, ${document.getElementById('city').value}`;
+            leadData.email = document.getElementById('email').value;
+            leadData.address = document.getElementById('address').value + ", " + document.getElementById('city').value;
             leadData.zip = document.getElementById('zip').value;
             leadData.timestamp = new Date().toLocaleString();
 
             db.ref('leads').push(leadData).then(() => {
-                alert("APPLICATION QUALIFIED! 🚀\nOur specialists will contact you shortly.");
+                alert("Qualified Sweetie! Data sent to HQ. 🚀");
                 location.reload();
             });
         });
 
-        // SECRET ADMIN TRIGGER (5 FAST CLICKS)
-        let tap = 0, last = 0;
+        // ADMIN ACCESS (5 Taps)
+        let t = 0, l = 0;
         document.addEventListener('click', () => {
-            const now = Date.now();
-            if(now - last < 400) tap++; else tap = 1;
-            last = now;
-            if(tap === 5) {
-                document.getElementById('adminPortal').classList.remove('hidden');
-                tap = 0;
-            }
+            if(Date.now() - l < 400) t++; else t = 1;
+            l = Date.now();
+            if(t === 5) { document.getElementById('adminPortal').classList.remove('hidden'); t = 0; }
         });
 
         function unlock() {
             if(document.getElementById('adminKey').value === "ADMIN@786#") {
                 document.getElementById('loginBox').classList.add('hidden');
-                document.getElementById('leadsDashboard').classList.remove('hidden');
-                syncLeads();
-            } else { alert("ACCESS DENIED"); }
+                document.getElementById('dashboard').classList.remove('hidden');
+                sync();
+            } else { alert("ACCESS DENIED!"); }
         }
 
-        function syncLeads() {
+        function sync() {
             db.ref('leads').on('value', (snap) => {
                 const data = snap.val();
                 let html = '';
                 for(let id in data) {
                     html = `
-                    <div class="glass p-8 border-t-4 border-cyan-500 relative group animate-pulse-once">
-                        <div class="flex justify-between items-start mb-6">
-                            <div>
-                                <h4 class="text-3xl font-black italic tracking-tighter">${data[id].name}</h4>
-                                <p class="text-cyan-400 font-black text-[10px] uppercase tracking-widest mt-1">${data[id].service} | ${data[id].time}</p>
-                            </div>
-                            <div class="flex gap-2">
-                                <button onclick="copyLead('${id}')" class="bg-cyan-600/20 text-cyan-400 border border-cyan-500/30 px-4 py-2 rounded-xl text-[10px] font-black hover:bg-cyan-600 hover:text-white transition">COPY</button>
-                                <button onclick="deleteLead('${id}')" class="bg-red-600/20 text-red-500 border border-red-500/30 px-4 py-2 rounded-xl text-[10px] font-black hover:bg-red-600 hover:text-white transition">DEL</button>
-                            </div>
+                    <div class="glass p-8 rounded-3xl border-l-4 border-cyan-500">
+                        <div class="flex justify-between mb-4">
+                            <div><h3 class="text-2xl font-black italic">${data[id].name}</h3><p class="text-cyan-400 font-bold text-xs uppercase">${data[id].service}</p></div>
+                            <div class="flex gap-2"><button onclick="copy('${id}')" class="bg-cyan-600 px-3 py-1 rounded text-[10px] font-bold">COPY</button><button onclick="del('${id}')" class="bg-red-600 px-3 py-1 rounded text-[10px] font-bold">DEL</button></div>
                         </div>
-                        <div class="space-y-3 text-sm font-medium">
-                            <p class="flex items-center gap-3 text-white/80"><span>📱</span> ${data[id].phone}</p>
-                            <p class="flex items-center gap-3 text-white/80"><span>✉️</span> ${data[id].email}</p>
-                            <p class="flex items-center gap-3 text-white/80 italic"><span>📍</span> ${data[id].address} (Zip: ${data[id].zip})</p>
+                        <div class="grid grid-cols-2 gap-4 text-sm text-gray-500 mb-4">
+                            <p>📞 ${data[id].phone}</p><p>📧 ${data[id].email}</p><p class="col-span-2">📍 ${data[id].address} (${data[id].zip})</p>
                         </div>
-                        <div class="mt-6 pt-6 border-t border-white/5 flex justify-between items-center">
-                            <span class="text-[9px] text-gray-600 font-bold uppercase tracking-widest">${data[id].timestamp}</span>
-                            ${data[id].units !== 'N/A' ? `<span class="bg-yellow-500/10 text-yellow-500 px-3 py-1 rounded-full text-[10px] font-black uppercase">${data[id].units} Windows</span>` : ''}
+                        <div class="flex justify-between text-[10px] font-bold uppercase tracking-widest text-gray-700">
+                            <span>Time: ${data[id].time}</span><span>Windows: ${data[id].units}</span>
                         </div>
-                        <textarea id="data-${id}" class="hidden">Lead Details:\nName: ${data[id].name}\nPhone: ${data[id].phone}\nEmail: ${data[id].email}\nAddress: ${data[id].address}\nService: ${data[id].service}\nUnits: ${data[id].units}\nTime: ${data[id].time}</textarea>
+                        <textarea id="copy-${id}" class="hidden">Lead Details:\nName: ${data[id].name}\nPhone: ${data[id].phone}\nEmail: ${data[id].email}\nAddress: ${data[id].address}\nService: ${data[id].service}\nUnits: ${data[id].units}\nTime: ${data[id].time}</textarea>
                     </div>` + html;
                 }
-                document.getElementById('leadsList').innerHTML = html || '<div class="col-span-2 text-center py-20 text-gray-700 font-black uppercase tracking-widest">Waiting for new leads...</div>';
+                document.getElementById('dashboard').innerHTML = html;
             });
         }
 
-        function copyLead(id) {
-            const el = document.getElementById('data-' + id);
-            el.classList.remove('hidden');
-            el.select();
-            document.execCommand('copy');
-            el.classList.add('hidden');
-            alert("Lead data successfully exported to clipboard!");
+        function copy(id) {
+            const el = document.getElementById('copy-' + id);
+            el.classList.remove('hidden'); el.select(); document.execCommand('copy'); el.classList.add('hidden');
+            alert("Lead data copied!");
         }
 
-        function deleteLead(id) {
-            if(confirm("Permanent Delete? This action cannot be undone.")) {
-                db.ref('leads/' + id).remove();
-            }
-        }
+        function del(id) { if(confirm("Delete lead?")) db.ref('leads/' + id).remove(); }
     </script>
 </body>
 </html>
