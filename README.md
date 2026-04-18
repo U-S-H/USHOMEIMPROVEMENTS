@@ -2,20 +2,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>U.S. HOME IMPROVEMENTS | National Enterprise Matrix</title>
+    <title>U.S. HOME IMPROVEMENTS | Official Site</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 
     <style>
-        :root { --neon: #00f2ff; --slate: #0f172a; --slate-light: #1e293b; --accent: #334155; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f8fafc; color: var(--slate); scroll-behavior: smooth; margin: 0; overflow-x: hidden; }
+        :root { --neon: #00f2ff; --slate: #0f172a; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f8fafc; color: var(--slate); scroll-behavior: smooth; }
         
-        /* Fixed Background Link */
+        /* Direct Path Links - Make sure images are in the same folder as index.html */
         .hero-bg {
             background: linear-gradient(rgba(15, 23, 42, 0.90), rgba(15, 23, 42, 0.85)),
-                        url('https://raw.githubusercontent.com/U-S-H/PRIMESOLUTIONS/main/WA_1776549402527.jpeg');
+                        url('./WA_1776549402527.jpeg');
             background-size: cover; background-position: center;
         }
 
@@ -26,130 +26,82 @@
 
         .step { display: none; }
         .step.active { display: block; animation: slideFade 0.5s ease-out; }
-        @keyframes slideFade { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideFade { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         .input-matrix {
-            width: 100%; padding: 1.25rem; border-radius: 1.25rem; border: 2px solid #f1f5f9;
-            font-weight: 600; outline: none; transition: 0.3s; background: #fff; appearance: none;
+            width: 100%; padding: 1.2rem; border-radius: 1rem; border: 2px solid #f1f5f9;
+            font-weight: 600; outline: none; transition: 0.3s;
         }
-        .input-matrix:focus { border-color: var(--neon); box-shadow: 0 0 20px rgba(0, 242, 255, 0.1); }
+        .input-matrix:focus { border-color: var(--neon); }
 
         .btn-elite {
-            background: var(--slate); color: white; padding: 1.3rem; border-radius: 1.25rem;
-            font-weight: 800; text-transform: uppercase; width: 100%; cursor: pointer; border: none; transition: 0.4s;
-            letter-spacing: 1px;
+            background: var(--slate); color: white; padding: 1.2rem; border-radius: 1rem;
+            font-weight: 800; width: 100%; cursor: pointer; transition: 0.4s;
         }
-        .btn-elite:hover { background: var(--neon); color: var(--slate); transform: translateY(-3px); }
+        .btn-elite:hover { background: var(--neon); color: var(--slate); transform: translateY(-2px); }
         
         .feature-card {
-            background: white; border-radius: 2rem; border: 1px solid #f1f5f9; transition: 0.4s; cursor: pointer;
-            overflow: hidden;
+            background: white; border-radius: 1.5rem; border: 1px solid #f1f5f9; transition: 0.4s; overflow: hidden;
         }
-        .feature-card:hover { border-color: var(--neon); transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
-        .feature-card img { width: 100%; height: 12rem; object-fit: cover; transition: 0.5s; }
-        .feature-card:hover img { transform: scale(1.05); }
+        .feature-card img { width: 100%; height: 200px; object-fit: cover; }
     </style>
 </head>
 <body>
 
-    <header class="hero-bg h-[65vh] flex flex-col items-center justify-center text-center px-6 text-white relative">
+    <header class="hero-bg h-[60vh] flex flex-col items-center justify-center text-center px-6 text-white relative">
         <div class="absolute top-8 left-8 flex items-center gap-3">
-            <img src="https://raw.githubusercontent.com/U-S-H/PRIMESOLUTIONS/main/WA_1776550450872.jpeg" alt="Logo" class="h-10">
-            <span class="text-[10px] font-black tracking-[0.3em] uppercase border-l-2 border-cyan-400 pl-4">National Enterprise</span>
+            <img src="./WA_1776550450872.jpeg" alt="Company Logo" class="h-10">
+            <span class="text-[10px] font-black tracking-widest uppercase border-l border-cyan-400 pl-4">U.S. Improvement Co.</span>
         </div>
-        <h1 class="text-5xl md:text-8xl font-black italic tracking-tighter uppercase leading-none mt-10">THE NATIONAL<br>STANDARD</h1>
-        <p class="text-cyan-400 font-bold tracking-[0.6em] text-[10px] mt-8 uppercase">Nationwide Certified Contractor Matrix</p>
-        <div class="mt-12">
-            <a href="#portal" class="bg-white text-slate-900 px-10 py-4 rounded-full font-black text-xs uppercase hover:bg-cyan-400 transition shadow-2xl">Start Qualification</a>
-        </div>
+        <h1 class="text-5xl md:text-7xl font-black italic uppercase leading-none">THE NATIONAL<br>STANDARD</h1>
+        <p class="text-cyan-400 font-bold tracking-widest text-xs mt-6 uppercase">Quality Home Improvements Across America</p>
     </header>
 
-    <section id="portal" class="max-w-3xl mx-auto -mt-24 px-4 mb-32 relative z-20">
-        <div class="glass-panel p-10 md:p-16 border-t-[10px] border-slate-900 shadow-2xl">
+    <section id="portal" class="max-w-2xl mx-auto -mt-20 px-4 mb-24 relative z-20">
+        <div class="glass-panel p-8 md:p-12 shadow-2xl">
             <form id="masterLeadForm">
                 <div class="step active" id="step1">
-                    <h2 class="text-3xl font-black italic mb-8 uppercase tracking-tight">01. Project Criteria</h2>
-                    <div class="space-y-6">
-                        <select id="homeowner" class="input-matrix" required>
-                            <option value="">Property Ownership Status?</option>
-                            <option value="Yes">I am the Homeowner</option>
-                            <option value="No">I am a Renter</option>
-                        </select>
+                    <h2 class="text-2xl font-black italic mb-6 uppercase">Select Service</h2>
+                    <div class="space-y-4">
                         <select id="service" class="input-matrix" required onchange="handleServiceSelection()">
-                            <option value="">Select Upgrade Service</option>
-                            <option value="Windows">Replacement Windows</option>
-                            <option value="Doors">Security Entry Doors</option>
-                            <option value="Roofing">Architectural Roofing</option>
-                            <option value="Solar">Residential Solar Matrix</option>
-                            <option value="Kitchen">Kitchen Remodeling</option>
-                            <option value="Bathroom">Bathroom Remodeling</option>
-                            <option value="Deck">Deck Remodeling</option>
-                            <option value="Garage">Garage Matrix</option>
-                            <option value="Build Home">Complete Home Build</option>
+                            <option value="">What do you need?</option>
+                            <option value="Windows">Windows</option>
+                            <option value="Doors">Doors</option>
+                            <option value="Roofing">Roofing</option>
+                            <option value="Solar">Solar</option>
+                            <option value="Kitchen">Kitchen</option>
+                            <option value="Bathroom">Bathroom</option>
+                            <option value="Deck">Deck</option>
+                            <option value="Garage">Garage</option>
                         </select>
-                        <div id="winDiv" class="hidden">
-                            <label class="text-[10px] font-black uppercase text-slate-400 ml-2 mb-2 block">Quantity of Units</label>
-                            <select id="winCount" class="input-matrix">
-                                <option value="">How many windows?</option>
-                                <option value="1-5">1 - 5 Windows</option>
-                                <option value="6-10">6 - 10 Windows</option>
-                                <option value="11-20">11 - 20 Windows</option>
-                                <option value="20+">20+ Units</option>
-                            </select>
-                        </div>
                         <button type="button" onclick="goNext('step2')" class="btn-elite">Continue</button>
                     </div>
                 </div>
 
                 <div class="step" id="step2">
-                    <h2 class="text-3xl font-black italic mb-8 uppercase tracking-tight">02. Timing & Eligibility</h2>
-                    <div class="space-y-6">
-                        <select id="ready" class="input-matrix" required>
-                            <option value="">Project Timeline</option>
-                            <option value="ASAP">As Soon As Possible</option>
-                            <option value="2-Months">Within 2 Months</option>
-                        </select>
-                        <button type="button" onclick="goNext('step3')" class="btn-elite">Schedule Visit</button>
-                    </div>
-                </div>
-
-                <div class="step" id="step3">
-                    <h2 class="text-3xl font-black italic mb-8 uppercase tracking-tight">03. Contact Protocol</h2>
+                    <h2 class="text-2xl font-black italic mb-6 uppercase">Contact Details</h2>
                     <div class="space-y-4">
-                        <input type="text" id="cName" placeholder="Full Legal Name" class="input-matrix" required>
-                        <input type="tel" id="cPhone" placeholder="Phone Number" class="input-matrix" required>
-                        <input type="email" id="cEmail" placeholder="Email Address" class="input-matrix" required>
-                        <button type="submit" class="btn-elite bg-cyan-500 text-slate-900">Authorise & Get Quote</button>
+                        <input type="text" id="cName" placeholder="Full Name" class="input-matrix" required>
+                        <input type="tel" id="cPhone" placeholder="Phone" class="input-matrix" required>
+                        <button type="submit" class="btn-elite bg-cyan-500 text-slate-900">Get My Quote</button>
                     </div>
                 </div>
             </form>
         </div>
     </section>
 
-    <section id="services" class="max-w-7xl mx-auto px-6 mb-32">
-        <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-8">
-            <div class="feature-card p-6">
-                <img src="https://raw.githubusercontent.com/U-S-H/PRIMESOLUTIONS/main/WA_1776549555727.jpeg" alt="Windows" class="rounded-2xl mb-4">
-                <h4 class="font-black uppercase text-xs italic">Windows Matrix</h4>
-            </div>
-            <div class="feature-card p-6">
-                <img src="https://raw.githubusercontent.com/U-S-H/PRIMESOLUTIONS/main/WA_1776549622236.jpeg" alt="Doors" class="rounded-2xl mb-4">
-                <h4 class="font-black uppercase text-xs italic">Security Entry Doors</h4>
-            </div>
-            <div class="feature-card p-6">
-                <img src="https://raw.githubusercontent.com/U-S-H/PRIMESOLUTIONS/main/WA_1776549716792.jpeg" alt="Roof" class="rounded-2xl mb-4">
-                <h4 class="font-black uppercase text-xs italic">Roofing Elite</h4>
-            </div>
-            <div class="feature-card p-6">
-                <img src="https://raw.githubusercontent.com/U-S-H/PRIMESOLUTIONS/main/WA_1776549781247.jpeg" alt="Solar" class="rounded-2xl mb-4">
-                <h4 class="font-black uppercase text-xs italic">Solar Matrix</h4>
-            </div>
+    <section class="max-w-6xl mx-auto px-6 mb-20">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="feature-card"><img src="./WA_1776549555727.jpeg" alt="Windows"> <div class="p-4 font-bold text-center">WINDOWS</div></div>
+            <div class="feature-card"><img src="./WA_1776549622236.jpeg" alt="Doors"> <div class="p-4 font-bold text-center">DOORS</div></div>
+            <div class="feature-card"><img src="./WA_1776549716792.jpeg" alt="Roofing"> <div class="p-4 font-bold text-center">ROOFING</div></div>
+            <div class="feature-card"><img src="./WA_1776549781247.jpeg" alt="Solar"> <div class="p-4 font-bold text-center">SOLAR</div></div>
         </div>
     </section>
 
-    <footer class="bg-slate-900 py-12 text-white/70 px-6 text-center">
-        <img src="https://raw.githubusercontent.com/U-S-H/PRIMESOLUTIONS/main/WA_1776550450872.jpeg" alt="Logo" class="h-10 mx-auto mb-6">
-        <p class="text-[9px] font-black uppercase tracking-[0.5em]">U.S. HOME IMPROVEMENTS • 2026</p>
+    <footer class="bg-slate-900 py-10 text-white/50 text-center">
+        <img src="./WA_1776550450872.jpeg" alt="Logo" class="h-8 mx-auto mb-4 grayscale brightness-200">
+        <p class="text-[9px] font-black uppercase tracking-widest">U.S. HOME IMPROVEMENTS • 2026</p>
     </footer>
 
     <script>
@@ -170,21 +122,16 @@
             document.getElementById(nextId).classList.add('active');
         }
 
-        function handleServiceSelection() {
-            const svc = document.getElementById('service').value;
-            document.getElementById('winDiv').classList.toggle('hidden', svc !== 'Windows');
-        }
-
         document.getElementById('masterLeadForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            const leadData = {
+            db.ref('leads').push({
                 name: document.getElementById('cName').value,
                 phone: document.getElementById('cPhone').value,
                 service: document.getElementById('service').value,
+                company: "US Home Improvement",
                 timestamp: new Date().toLocaleString()
-            };
-            db.ref('leads').push(leadData).then(() => {
-                alert("QUALIFIED!");
+            }).then(() => {
+                alert("Quote Requested Successfully!");
                 location.reload();
             });
         });
