@@ -2,85 +2,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>U.S. HOME IMPROVEMENTS | National Pro Network</title>
+    <title>U.S. HOME IMPROVEMENTS | Official National Network</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background: #0b0f1a; color: white; overflow-x: hidden; }
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #080a10; color: white; }
+        .glass { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
         .step { display: none; }
-        .step.active { display: block; animation: slideIn 0.4s ease-out; }
-        @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
-        .btn-gradient { background: linear-gradient(90deg, #2563eb, #3b82f6); transition: all 0.3s ease; }
-        .btn-gradient:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3); }
+        .step.active { display: block; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+        .service-card:hover { transform: translateY(-5px); border-color: #3b82f6; background: rgba(59, 130, 246, 0.1); }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center py-10 px-4">
+<body>
 
-    <nav class="w-full max-w-6xl flex justify-between items-center mb-16">
-        <div class="text-2xl font-extrabold tracking-tighter text-blue-500">U.S. HOME IMPROVEMENTS</div>
-        <div class="hidden md:block text-sm text-gray-400 uppercase tracking-widest">Premium Service Network</div>
+    <nav class="sticky top-0 z-50 glass px-6 py-4 flex justify-between items-center">
+        <div class="text-xl font-extrabold tracking-tighter text-blue-500">U.S. HOME IMPROVEMENTS</div>
+        <a href="#quote" class="bg-blue-600 px-5 py-2 rounded-full text-sm font-bold hover:bg-blue-500 transition">Get Started</a>
     </nav>
 
-    <div class="text-center mb-12">
-        <h1 class="text-5xl md:text-6xl font-extrabold mb-4 leading-tight">Upgrade Your Home <br><span class="text-blue-500 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">The Smart Way.</span></h1>
-        <p class="text-gray-400 max-w-xl mx-auto">Get matched with top-rated local contractors in minutes. Professional service, guaranteed quality.</p>
-    </div>
-
-    <div class="glass w-full max-w-lg p-8 rounded-3xl shadow-2xl relative overflow-hidden">
-        <div class="absolute top-0 left-0 w-full h-1 bg-gray-800">
-            <div id="progress" class="h-full bg-blue-500 transition-all duration-500" style="width: 25%;"></div>
+    <section class="py-20 px-4 text-center">
+        <div class="inline-block px-4 py-1 border border-blue-500/30 rounded-full text-blue-400 text-xs font-bold mb-6 tracking-widest uppercase">#1 Contractor Network in USA</div>
+        <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight">Better Homes,<br><span class="text-blue-500">Trusted Pros.</span></h1>
+        <p class="text-gray-400 max-w-2xl mx-auto text-lg mb-10">Connect with pre-screened home improvement specialists for roofing, solar, HVAC, and more in your local area.</p>
+        
+        <div class="flex flex-wrap justify-center gap-8 opacity-60 grayscale hover:grayscale-0 transition duration-500">
+            <span class="font-bold border-r pr-8 border-gray-700">⭐ 4.9/5 Rating</span>
+            <span class="font-bold border-r pr-8 border-gray-700">✓ Licensed & Insured</span>
+            <span class="font-bold">✓ BBB Accredited</span>
         </div>
+    </section>
 
-        <form id="mainLeadForm">
-            <div class="step active" id="step1">
-                <h3 class="text-xl font-bold mb-6 italic text-blue-300 underline">01. Choose Service</h3>
-                <div class="grid grid-cols-1 gap-3 mb-8 text-left">
-                    <button type="button" onclick="selectOption('service', 'Roofing', 2)" class="p-4 rounded-xl border border-gray-700 bg-gray-800/50 hover:border-blue-500 hover:bg-blue-500/10 transition text-left">🏠 Roofing Services</button>
-                    <button type="button" onclick="selectOption('service', 'HVAC', 2)" class="p-4 rounded-xl border border-gray-700 bg-gray-800/50 hover:border-blue-500 hover:bg-blue-500/10 transition text-left">❄️ HVAC Installation</button>
-                    <button type="button" onclick="selectOption('service', 'Solar', 2)" class="p-4 rounded-xl border border-gray-700 bg-gray-800/50 hover:border-blue-500 hover:bg-blue-500/10 transition text-left">☀️ Solar Energy Solutions</button>
-                    <button type="button" onclick="selectOption('service', 'Remodeling', 2)" class="p-4 rounded-xl border border-gray-700 bg-gray-800/50 hover:border-blue-500 hover:bg-blue-500/10 transition text-left">🛁 Kitchen & Bath Remodel</button>
-                </div>
-                <input type="hidden" id="selectedService">
-            </div>
-
-            <div class="step" id="step2">
-                <h3 class="text-xl font-bold mb-6 italic text-blue-300 underline">02. Project Location</h3>
-                <input type="text" id="zipCode" placeholder="Enter ZIP Code" class="w-full bg-gray-900 border border-gray-700 p-4 rounded-xl mb-4 focus:border-blue-500 outline-none">
-                <select id="state" class="w-full bg-gray-900 border border-gray-700 p-4 rounded-xl mb-6 outline-none focus:border-blue-500 text-gray-400">
-                    <option value="">Select Your State</option>
-                    <option value="AL">Alabama</option><option value="CA">California</option><option value="FL">Florida</option>
-                    <option value="NY">New York</option><option value="TX">Texas</option>
-                    </select>
-                <button type="button" onclick="goToStep(3)" class="w-full btn-gradient py-4 rounded-xl font-bold">Continue</button>
-            </div>
-
-            <div class="step" id="step3">
-                <h3 class="text-xl font-bold mb-6 italic text-blue-300 underline">03. Verification</h3>
-                <div class="space-y-4 mb-6">
-                    <p class="text-sm text-gray-400 text-center">Do you own the property?</p>
-                    <div class="flex gap-4">
-                        <button type="button" onclick="selectOption('owner', 'Yes', 4)" class="flex-1 p-4 rounded-xl border border-gray-700 bg-gray-800/50 hover:border-blue-500 transition">Yes</button>
-                        <button type="button" onclick="selectOption('owner', 'No', 4)" class="flex-1 p-4 rounded-xl border border-gray-700 bg-gray-800/50 hover:border-blue-500 transition">No</button>
+    <section id="quote" class="py-12 px-4">
+        <div class="glass max-w-xl mx-auto p-8 rounded-[2rem] shadow-2xl relative">
+            <div id="progress" class="absolute top-0 left-0 h-1 bg-blue-500 transition-all" style="width: 25%;"></div>
+            
+            <form id="mainLeadForm">
+                <div class="step active" id="step1">
+                    <h2 class="text-2xl font-bold mb-6 text-center">Select Your Project</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                        <button type="button" onclick="selectOption('service', 'Roofing', 2)" class="p-5 glass service-card rounded-2xl text-left transition">🏠 Roofing</button>
+                        <button type="button" onclick="selectOption('service', 'Solar', 2)" class="p-5 glass service-card rounded-2xl text-left transition">☀️ Solar Energy</button>
+                        <button type="button" onclick="selectOption('service', 'HVAC', 2)" class="p-5 glass service-card rounded-2xl text-left transition">❄️ HVAC Repair</button>
+                        <button type="button" onclick="selectOption('service', 'Kitchen', 2)" class="p-5 glass service-card rounded-2xl text-left transition">🛁 Remodeling</button>
                     </div>
                 </div>
-                <input type="hidden" id="isOwner">
-            </div>
 
-            <div class="step" id="step4">
-                <h3 class="text-xl font-bold mb-6 italic text-blue-300 underline">04. Contact Details</h3>
-                <div class="space-y-4 mb-6">
-                    <input type="text" id="userName" placeholder="Full Name" class="w-full bg-gray-900 border border-gray-700 p-4 rounded-xl focus:border-blue-500 outline-none">
-                    <input type="tel" id="userPhone" placeholder="Phone Number" class="w-full bg-gray-900 border border-gray-700 p-4 rounded-xl focus:border-blue-500 outline-none">
+                <div class="step" id="step2">
+                    <h2 class="text-2xl font-bold mb-6 text-center">Project Location</h2>
+                    <input type="text" id="zipCode" placeholder="Enter Zip Code" class="w-full p-4 glass rounded-xl mb-4 focus:border-blue-500 outline-none">
+                    <button type="button" onclick="goToStep(3)" class="w-full bg-blue-600 p-4 rounded-xl font-bold">Next Step</button>
                 </div>
-                <button type="submit" class="w-full bg-green-600 hover:bg-green-500 py-4 rounded-xl font-bold transition shadow-lg">Submit Request</button>
-            </div>
-        </form>
-    </div>
 
-    <footer class="mt-20 text-gray-600 text-xs text-center">
-        &copy; 2026 U.S. HOME IMPROVEMENTS. All Rights Reserved. <br>
-        Licensed & Insured Across 50 States.
+                <div class="step" id="step3">
+                    <h2 class="text-2xl font-bold mb-6 text-center">Your Details</h2>
+                    <input type="text" id="userName" placeholder="Full Name" class="w-full p-4 glass rounded-xl mb-4 outline-none">
+                    <input type="tel" id="userPhone" placeholder="Phone Number" class="w-full p-4 glass rounded-xl mb-6 outline-none">
+                    <button type="submit" class="w-full bg-green-600 p-4 rounded-xl font-bold">Get My Free Quote</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section class="py-20 bg-[#0c0f17]">
+        <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-10">
+            <div class="p-8 glass rounded-3xl">
+                <div class="text-blue-500 text-3xl mb-4 italic">01</div>
+                <h4 class="text-xl font-bold mb-2 text-blue-300">Fast Match</h4>
+                <p class="text-gray-400 text-sm">We find the best contractors near you within 24 hours.</p>
+            </div>
+            <div class="p-8 glass rounded-3xl">
+                <div class="text-blue-500 text-3xl mb-4 italic">02</div>
+                <h4 class="text-xl font-bold mb-2 text-blue-300">Verified Pros</h4>
+                <p class="text-gray-400 text-sm">Every contractor is vetted for license and insurance.</p>
+            </div>
+            <div class="p-8 glass rounded-3xl">
+                <div class="text-blue-500 text-3xl mb-4 italic">03</div>
+                <h4 class="text-xl font-bold mb-2 text-blue-300">Best Price</h4>
+                <p class="text-gray-400 text-sm">Compare multiple quotes to save up to 40% on your project.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 px-6 max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold mb-10 text-center">Service Directory</h2>
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 text-gray-500 text-sm">
+            <a href="#" class="hover:text-blue-400 transition">Alabama</a> <a href="#" class="hover:text-blue-400 transition">California</a>
+            <a href="#" class="hover:text-blue-400 transition">Florida</a> <a href="#" class="hover:text-blue-400 transition">Texas</a>
+            <a href="#" class="hover:text-blue-400 transition">New York</a> <a href="#" class="hover:text-blue-400 transition">Georgia</a>
+            <a href="#" class="hover:text-blue-400 transition">Arizona</a> <a href="#" class="hover:text-blue-400 transition">Illinois</a>
+            <a href="#" class="hover:text-blue-400 transition">Nevada</a> <a href="#" class="hover:text-blue-400 transition">Michigan</a>
+        </div>
+    </section>
+
+    <footer class="py-10 border-t border-gray-900 text-center text-gray-600 text-sm">
+        <p>&copy; 2026 U.S. HOME IMPROVEMENTS. All Rights Reserved.</p>
+        <div class="mt-4 flex justify-center gap-6">
+            <a href="#">Privacy Policy</a> <a href="#">Terms of Service</a> <a href="#">Contact Us</a>
+        </div>
     </footer>
 
     <script type="module">
@@ -99,43 +118,37 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Form Submit
-        document.getElementById('mainLeadForm').addEventListener('submit', async (e) => {
+        const form = document.getElementById('mainLeadForm');
+        form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const btn = e.target.querySelector('button[type="submit"]');
-            btn.innerText = "Processing...";
-            
-            const leadData = {
+            const data = {
                 service: document.getElementById('selectedService').value,
                 zip: document.getElementById('zipCode').value,
-                state: document.getElementById('state').value,
-                owner: document.getElementById('isOwner').value,
                 name: document.getElementById('userName').value,
                 phone: document.getElementById('userPhone').value,
-                date: new Date().toLocaleString()
+                timestamp: new Date()
             };
-
             try {
-                await addDoc(collection(db, "leads"), leadData);
-                alert("Success! We've received your request.");
-                window.location.reload();
-            } catch (err) {
-                alert("Error saving lead. Check Firebase Rules!");
-                btn.innerText = "Submit Request";
-            }
+                await addDoc(collection(db, "leads"), data);
+                alert("Request Sent! A pro will call you soon.");
+                location.reload();
+            } catch (err) { alert("Error: " + err.message); }
         });
     </script>
 
     <script>
+        let leadState = { service: "" };
         function goToStep(s) {
             document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
             document.getElementById('step' + s).classList.add('active');
-            document.getElementById('progress').style.width = (s * 25) + "%";
+            document.getElementById('progress').style.width = (s * 33.3) + "%";
         }
-
         function selectOption(type, val, next) {
-            if(type === 'service') document.getElementById('selectedService').value = val;
-            if(type === 'owner') document.getElementById('isOwner').value = val;
+            if(type === 'service') {
+                const hiddenInput = document.createElement("input");
+                hiddenInput.type = "hidden"; hiddenInput.id = "selectedService";
+                hiddenInput.value = val; document.getElementById('mainLeadForm').appendChild(hiddenInput);
+            }
             goToStep(next);
         }
     </script>
