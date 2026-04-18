@@ -12,7 +12,7 @@
         :root { --neon: #00f2ff; --slate: #0f172a; --slate-light: #1e293b; --accent: #334155; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f8fafc; color: var(--slate); scroll-behavior: smooth; margin: 0; overflow-x: hidden; }
         
-        /* Fixed Hero Background with your link */
+        /* Fixed Background Link */
         .hero-bg {
             background: linear-gradient(rgba(15, 23, 42, 0.90), rgba(15, 23, 42, 0.85)),
                         url('https://raw.githubusercontent.com/U-S-H/PRIMESOLUTIONS/main/WA_1776549402527.jpeg');
@@ -109,31 +109,17 @@
                             <option value="ASAP">As Soon As Possible</option>
                             <option value="2-Months">Within 2 Months</option>
                         </select>
-                        <select id="credit" class="input-matrix" required>
-                            <option value="">Estimated Credit Rating</option>
-                            <option value="Excellent (720+)">Excellent (720+)</option>
-                            <option value="Good (660-719)">Good (660-719)</option>
-                        </select>
                         <button type="button" onclick="goNext('step3')" class="btn-elite">Schedule Visit</button>
                     </div>
                 </div>
 
                 <div class="step" id="step3">
-                    <h2 class="text-3xl font-black italic mb-8 uppercase tracking-tight">03. Deployment Window</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                        <div><input type="date" id="appDate" class="input-matrix" required></div>
-                        <div><select id="appTime" class="input-matrix"><option>Morning</option><option>Afternoon</option></select></div>
-                    </div>
-                    <button type="button" onclick="goNext('step4')" class="btn-elite">Final Details</button>
-                </div>
-
-                <div class="step" id="step4">
-                    <h2 class="text-3xl font-black italic mb-8 uppercase tracking-tight">04. Contact Protocol</h2>
+                    <h2 class="text-3xl font-black italic mb-8 uppercase tracking-tight">03. Contact Protocol</h2>
                     <div class="space-y-4">
                         <input type="text" id="cName" placeholder="Full Legal Name" class="input-matrix" required>
                         <input type="tel" id="cPhone" placeholder="Phone Number" class="input-matrix" required>
                         <input type="email" id="cEmail" placeholder="Email Address" class="input-matrix" required>
-                        <button type="submit" class="btn-elite bg-cyan-500 text-slate-900 shadow-xl shadow-cyan-100">Authorise & Get Quote</button>
+                        <button type="submit" class="btn-elite bg-cyan-500 text-slate-900">Authorise & Get Quote</button>
                     </div>
                 </div>
             </form>
@@ -141,41 +127,22 @@
     </section>
 
     <section id="services" class="max-w-7xl mx-auto px-6 mb-32">
-        <div class="text-center mb-16">
-            <h3 class="text-4xl font-black italic uppercase">National Network Services</h3>
-        </div>
         <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-8">
-            <div class="feature-card p-6" onclick="document.getElementById('portal').scrollIntoView()">
+            <div class="feature-card p-6">
                 <img src="https://raw.githubusercontent.com/U-S-H/PRIMESOLUTIONS/main/WA_1776549555727.jpeg" alt="Windows" class="rounded-2xl mb-4">
                 <h4 class="font-black uppercase text-xs italic">Windows Matrix</h4>
             </div>
-            <div class="feature-card p-6" onclick="document.getElementById('portal').scrollIntoView()">
+            <div class="feature-card p-6">
                 <img src="https://raw.githubusercontent.com/U-S-H/PRIMESOLUTIONS/main/WA_1776549622236.jpeg" alt="Doors" class="rounded-2xl mb-4">
                 <h4 class="font-black uppercase text-xs italic">Security Entry Doors</h4>
             </div>
-            <div class="feature-card p-6" onclick="document.getElementById('portal').scrollIntoView()">
+            <div class="feature-card p-6">
                 <img src="https://raw.githubusercontent.com/U-S-H/PRIMESOLUTIONS/main/WA_1776549716792.jpeg" alt="Roof" class="rounded-2xl mb-4">
                 <h4 class="font-black uppercase text-xs italic">Roofing Elite</h4>
             </div>
-            <div class="feature-card p-6" onclick="document.getElementById('portal').scrollIntoView()">
+            <div class="feature-card p-6">
                 <img src="https://raw.githubusercontent.com/U-S-H/PRIMESOLUTIONS/main/WA_1776549781247.jpeg" alt="Solar" class="rounded-2xl mb-4">
                 <h4 class="font-black uppercase text-xs italic">Solar Matrix</h4>
-            </div>
-            <div class="feature-card p-6" onclick="document.getElementById('portal').scrollIntoView()">
-                <img src="https://raw.githubusercontent.com/U-S-H/PRIMESOLUTIONS/main/WA_1776549862258.jpeg" alt="Kitchen" class="rounded-2xl mb-4">
-                <h4 class="font-black uppercase text-xs italic">Kitchen Remodel</h4>
-            </div>
-            <div class="feature-card p-6" onclick="document.getElementById('portal').scrollIntoView()">
-                <img src="https://raw.githubusercontent.com/U-S-H/PRIMESOLUTIONS/main/WA_1776549917709.jpeg" alt="Bathroom" class="rounded-2xl mb-4">
-                <h4 class="font-black uppercase text-xs italic">Bathroom Remodel</h4>
-            </div>
-            <div class="feature-card p-6" onclick="document.getElementById('portal').scrollIntoView()">
-                <img src="https://raw.githubusercontent.com/U-S-H/PRIMESOLUTIONS/main/WA_1776549990293.jpeg" alt="Deck" class="rounded-2xl mb-4">
-                <h4 class="font-black uppercase text-xs italic">Deck Remodel</h4>
-            </div>
-            <div class="feature-card p-6" onclick="document.getElementById('portal').scrollIntoView()">
-                <img src="https://raw.githubusercontent.com/U-S-H/PRIMESOLUTIONS/main/WA_1776550066723.jpeg" alt="Garage" class="rounded-2xl mb-4">
-                <h4 class="font-black uppercase text-xs italic">Garage Matrix</h4>
             </div>
         </div>
     </section>
