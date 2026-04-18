@@ -2,160 +2,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>U.S. HOME IMPROVEMENTS | Official National Contractor Network</title>
+    <title>U.S. HOME IMPROVEMENTS | Premium Contractor Network</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #05070a; color: white; scroll-behavior: smooth; }
-        .glass { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        :root { --accent: #3b82f6; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #030406; color: white; overflow-x: hidden; }
+        
+        /* Premium Background Animation */
+        .blob { position: absolute; width: 400px; height: 400px; background: rgba(59, 130, 246, 0.15); filter: blur(100px); border-radius: 50%; z-index: -1; animation: move 20s infinite alternate; }
+        @keyframes move { from { transform: translate(-10%, -10%); } to { transform: translate(20%, 20%); } }
+
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .glass:hover { background: rgba(255, 255, 255, 0.06); border-color: var(--accent); transform: translateY(-5px); }
+        
         .step { display: none; }
-        .step.active { display: block; animation: slideUp 0.5s ease; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .hero-bg { 
-            background: linear-gradient(rgba(5, 7, 10, 0.85), rgba(5, 7, 10, 0.85)), 
-            url('https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=1600'); 
-            background-size: cover; background-position: center; 
-        }
-        .service-img { height: 200px; width: 100%; object-fit: cover; border-radius: 20px; transition: transform 0.5s; }
-        .glass-card:hover .service-img { transform: scale(1.05); }
-        .btn-blue { background: linear-gradient(90deg, #2563eb, #3b82f6); transition: all 0.3s; }
-        .btn-blue:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4); }
+        .step.active { display: block; animation: slideIn 0.6s ease forwards; }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+
+        .premium-btn { background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%); position: relative; overflow: hidden; }
+        .premium-btn::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: rgba(255,255,255,0.1); transform: rotate(45deg); transition: 0.5s; }
+        .premium-btn:hover::after { left: 120%; }
+
+        .stat-card { border-left: 2px solid var(--accent); }
     </style>
 </head>
 <body>
 
-    <nav class="sticky top-0 z-50 glass px-6 py-4 flex justify-between items-center backdrop-blur-xl">
-        <div class="text-xl font-extrabold tracking-tighter text-blue-500">U.S. HOME IMPROVEMENTS</div>
-        <div class="hidden md:flex gap-8 text-[10px] font-bold uppercase tracking-widest text-gray-400">
-            <a href="#services" class="hover:text-blue-400 transition">Services</a>
-            <a href="#directory" class="hover:text-blue-400 transition">Locations</a>
-            <a href="mailto:ushomeimprovement07@gmail.com" class="hover:text-blue-400 transition">Contact</a>
+    <div class="blob" style="top: 0; left: 0;"></div>
+    <div class="blob" style="bottom: 0; right: 0; background: rgba(37, 99, 235, 0.1);"></div>
+
+    <div class="w-full py-2 bg-blue-600/10 border-b border-blue-500/20 text-center">
+        <p class="text-[10px] font-bold tracking-[0.3em] text-blue-400 uppercase">Verified State Licensed & A+ BBB Accredited Network</p>
+    </div>
+
+    <nav class="sticky top-0 z-50 glass mx-4 my-4 rounded-2xl px-6 py-4 flex justify-between items-center">
+        <div class="flex flex-col">
+            <span class="text-xl font-extrabold tracking-tighter text-blue-500">U.S. HOME IMPROVEMENTS</span>
+            <span class="text-[8px] text-gray-500 font-bold tracking-widest uppercase">Reg #US-770821-B</span>
         </div>
-        <a href="#quote" class="bg-blue-600 px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-blue-500 transition">Get Started</a>
+        <div class="hidden md:flex gap-8 text-[10px] font-bold uppercase tracking-widest text-gray-400">
+            <a href="#quote" class="hover:text-white transition">Services</a>
+            <a href="#trust" class="hover:text-white transition">Trust Centers</a>
+            <a href="mailto:ushomeimprovement07@gmail.com" class="hover:text-white transition">Support</a>
+        </div>
+        <a href="#quote" class="premium-btn px-6 py-2.5 rounded-xl text-[10px] font-bold uppercase tracking-widest">Free Estimate</a>
     </nav>
 
-    <section class="hero-bg py-32 px-4 text-center border-b border-white/5">
-        <div class="inline-block px-4 py-1 border border-blue-500/30 rounded-full text-blue-400 text-[9px] font-bold mb-8 tracking-[0.3em] uppercase">Trusted Across 50 States</div>
-        <h1 class="text-5xl md:text-8xl font-extrabold mb-8 leading-tight tracking-tighter">Your Home. <br><span class="text-blue-500">Perfected.</span></h1>
-        <p class="text-gray-400 max-w-2xl mx-auto text-lg mb-12">The most reliable way to find pre-vetted, licensed, and local home improvement professionals in the United States.</p>
+    <section class="relative pt-20 pb-12 px-6 text-center">
+        <div class="inline-block px-4 py-1.5 glass rounded-full text-blue-400 text-[9px] font-bold mb-8 tracking-widest uppercase border-blue-500/30">Built for American Homeowners</div>
+        <h1 class="text-6xl md:text-8xl font-extrabold mb-8 tracking-tighter leading-none">Modern Homes.<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">Expert Hands.</span></h1>
+        <p class="text-gray-400 max-w-2xl mx-auto text-lg mb-12 leading-relaxed">Connect with premium, licensed, and background-checked contractors for elite home transformations.</p>
         
-        <div class="flex flex-wrap justify-center gap-12 opacity-50 grayscale hover:grayscale-0 transition duration-700">
-            <div class="flex flex-col items-center">
-                <span class="text-2xl font-bold italic">⭐ 4.9/5</span>
-                <span class="text-[9px] uppercase font-bold tracking-widest">Trust Rating</span>
-            </div>
-            <div class="flex flex-col items-center">
-                <span class="text-2xl font-bold italic">500k+</span>
-                <span class="text-[9px] uppercase font-bold tracking-widest">Happy Clients</span>
-            </div>
+        <div class="flex justify-center gap-4 md:gap-12 flex-wrap">
+            <div class="stat-card px-6 py-2 text-left"><p class="text-2xl font-bold italic">45k+</p><p class="text-[9px] uppercase tracking-widest text-gray-500">Projects Done</p></div>
+            <div class="stat-card px-6 py-2 text-left"><p class="text-2xl font-bold italic">A+ Rating</p><p class="text-[9px] uppercase tracking-widest text-gray-500">BBB Accredited</p></div>
+            <div class="stat-card px-6 py-2 text-left"><p class="text-2xl font-bold italic">100%</p><p class="text-[9px] uppercase tracking-widest text-gray-500">Insured Pros</p></div>
         </div>
     </section>
 
-    <section id="quote" class="py-20 px-4 bg-[#080a10]">
-        <div class="max-w-xl mx-auto glass p-8 md:p-12 rounded-[3rem] shadow-2xl relative border-blue-500/10">
-            <div id="progress" class="absolute top-0 left-0 h-1 bg-blue-500 transition-all duration-700" style="width: 33.3%;"></div>
-            
-            <form id="finalLeadForm">
+    <section id="quote" class="py-20 px-6">
+        <div class="max-w-xl mx-auto glass p-10 md:p-14 rounded-[3.5rem] shadow-3xl border-t-2 border-blue-500/50">
+            <form id="premiumForm">
                 <div class="step active" id="step1">
-                    <h2 class="text-3xl font-bold mb-2">Select Service</h2>
-                    <p class="text-gray-500 text-sm mb-8 italic">Choose your project to begin</p>
-                    <div class="grid grid-cols-1 gap-3">
-                        <button type="button" onclick="setVal('service', 'Roofing', 2)" class="p-5 glass rounded-2xl border border-white/5 hover:border-blue-500 text-left transition flex justify-between items-center">
-                            <span>🏠 Roofing (New/Repair)</span> <span class="text-blue-500">→</span>
+                    <h2 class="text-3xl font-extrabold mb-2 italic">Select Project</h2>
+                    <p class="text-gray-500 text-sm mb-10 tracking-wide">Select your primary category</p>
+                    <div class="space-y-4">
+                        <button type="button" onclick="setVal('service', 'Roofing', 2)" class="w-full glass p-6 rounded-3xl text-left flex justify-between items-center group">
+                            <span class="font-bold tracking-tight">🏠 Roofing & Exterior</span>
+                            <span class="text-blue-500 group-hover:translate-x-2 transition">→</span>
                         </button>
-                        <button type="button" onclick="setVal('service', 'Solar', 2)" class="p-5 glass rounded-2xl border border-white/5 hover:border-blue-500 text-left transition flex justify-between items-center">
-                            <span>☀️ Solar Energy Panels</span> <span class="text-blue-500">→</span>
+                        <button type="button" onclick="setVal('service', 'Solar', 2)" class="w-full glass p-6 rounded-3xl text-left flex justify-between items-center group">
+                            <span class="font-bold tracking-tight">☀️ Solar & Energy</span>
+                            <span class="text-blue-500 group-hover:translate-x-2 transition">→</span>
                         </button>
-                        <button type="button" onclick="setVal('service', 'HVAC', 2)" class="p-5 glass rounded-2xl border border-white/5 hover:border-blue-500 text-left transition flex justify-between items-center">
-                            <span>❄️ HVAC & AC Systems</span> <span class="text-blue-500">→</span>
-                        </button>
-                        <button type="button" onclick="setVal('service', 'Kitchen', 2)" class="p-5 glass rounded-2xl border border-white/5 hover:border-blue-500 text-left transition flex justify-between items-center">
-                            <span>🛁 Kitchen & Bath Remodel</span> <span class="text-blue-500">→</span>
+                        <button type="button" onclick="setVal('service', 'Kitchen', 2)" class="w-full glass p-6 rounded-3xl text-left flex justify-between items-center group">
+                            <span class="font-bold tracking-tight">🛁 Premium Remodeling</span>
+                            <span class="text-blue-500 group-hover:translate-x-2 transition">→</span>
                         </button>
                     </div>
                 </div>
 
                 <div class="step" id="step2">
-                    <h2 class="text-3xl font-bold mb-8 text-blue-400 underline italic">02. Location</h2>
-                    <input type="text" id="zip" placeholder="Zip Code (e.g. 90210)" class="w-full p-5 glass rounded-2xl mb-4 outline-none focus:ring-1 ring-blue-500">
-                    <select id="state" class="w-full p-5 glass rounded-2xl mb-8 outline-none text-gray-400 bg-[#0c0f17]">
-                        <option value="">Select Your State</option>
-                        <option value="AL">Alabama</option><option value="AZ">Arizona</option><option value="CA">California</option>
-                        <option value="FL">Florida</option><option value="GA">Georgia</option><option value="IL">Illinois</option>
-                        <option value="MI">Michigan</option><option value="NY">New York</option><option value="TX">Texas</option>
-                        <option value="WA">Washington</option>
-                    </select>
-                    <button type="button" onclick="move(3)" class="w-full btn-blue p-5 rounded-2xl font-bold text-lg">Next Step</button>
+                    <h2 class="text-3xl font-extrabold mb-8 italic">Project Location</h2>
+                    <div class="space-y-6">
+                        <input type="text" id="zip" placeholder="Zip Code" class="w-full p-5 glass rounded-2xl outline-none focus:ring-2 ring-blue-500 transition">
+                        <select id="state" class="w-full p-5 glass rounded-2xl outline-none bg-[#0a0c10]">
+                            <option value="">Select State</option>
+                            <option value="TX">Texas</option><option value="CA">California</option><option value="FL">Florida</option><option value="NY">New York</option>
+                        </select>
+                        <button type="button" onclick="move(3)" class="w-full premium-btn p-5 rounded-2xl font-bold uppercase tracking-widest">Verify Area</button>
+                    </div>
                 </div>
 
                 <div class="step" id="step3">
-                    <h2 class="text-3xl font-bold mb-4">Contact</h2>
-                    <p class="text-gray-500 text-sm mb-8">Receive up to 3 free estimates within 24 hours.</p>
-                    <input type="text" id="name" placeholder="Full Name" class="w-full p-5 glass rounded-2xl mb-4 outline-none">
-                    <input type="tel" id="phone" placeholder="Phone Number" class="w-full p-5 glass rounded-2xl mb-8 outline-none">
-                    <button type="submit" class="w-full bg-green-600 p-5 rounded-2xl font-bold text-lg hover:bg-green-500 transition-all shadow-xl shadow-green-900/20">Submit Free Request</button>
+                    <h2 class="text-3xl font-extrabold mb-2 italic">Final Security</h2>
+                    <p class="text-gray-500 text-sm mb-10">Verification required for licensed quotes.</p>
+                    <div class="space-y-4">
+                        <input type="text" id="name" placeholder="Full Name" class="w-full p-5 glass rounded-2xl outline-none">
+                        <input type="tel" id="phone" placeholder="Mobile Number" class="w-full p-5 glass rounded-2xl outline-none">
+                        <button type="submit" class="w-full bg-green-600 p-5 rounded-2xl font-bold uppercase tracking-widest hover:bg-green-500 transition">Secure Estimates</button>
+                    </div>
                 </div>
             </form>
         </div>
     </section>
 
-    <section id="services" class="py-32 max-w-7xl mx-auto px-6">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-extrabold mb-4">Top Professional Services</h2>
-            <div class="h-1 w-20 bg-blue-500 mx-auto"></div>
+    <section id="trust" class="py-24 max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12">
+        <div class="glass p-10 rounded-[3rem]">
+            <h4 class="text-xl font-extrabold mb-4 italic text-blue-400 underline">Compliance Checked</h4>
+            <p class="text-gray-500 text-sm leading-relaxed">Every professional in our network is audited for Active State Licenses and General Liability Insurance (Minimum $1M Coverage). We handle the verification so you don't have to.</p>
         </div>
-        <div class="grid md:grid-cols-3 gap-10">
-            <div class="glass-card group">
-                <img src="https://images.unsplash.com/photo-1632759145351-1d592919f522?auto=format&fit=crop&q=80&w=800" class="service-img" alt="Roof">
-                <h3 class="text-xl font-bold mt-6 mb-2">Roofing Solutions</h3>
-                <p class="text-gray-500 text-sm">From repairs to full replacements, our pros ensure a lifetime of protection.</p>
-            </div>
-            <div class="glass-card group">
-                <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&q=80&w=800" class="service-img" alt="Solar">
-                <h3 class="text-xl font-bold mt-6 mb-2">Sustainable Solar</h3>
-                <p class="text-gray-500 text-sm">Join the energy revolution and lower your bills with top-tier panel installation.</p>
-            </div>
-            <div class="glass-card group">
-                <img src="https://images.unsplash.com/photo-1556911220-e150223bd797?auto=format&fit=crop&q=80&w=800" class="service-img" alt="Kitchen">
-                <h3 class="text-xl font-bold mt-6 mb-2">Premium Remodeling</h3>
-                <p class="text-gray-500 text-sm">Transform your kitchen or bathroom with award-winning local designers.</p>
-            </div>
+        <div class="glass p-10 rounded-[3rem]">
+            <h4 class="text-xl font-extrabold mb-4 italic text-blue-400 underline">Consumer Protection</h4>
+            <p class="text-gray-500 text-sm leading-relaxed">Operating under National Business Standards, we ensure fair pricing through competitive quoting—allowing homeowners to save up to 40% on labor costs.</p>
         </div>
     </section>
 
-    <section id="directory" class="py-24 bg-[#030508] border-t border-white/5">
-        <div class="max-w-6xl mx-auto px-6">
-            <h3 class="text-xs font-bold text-blue-500 uppercase tracking-[0.4em] mb-12 text-center italic">National Service Directory</h3>
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-y-6 gap-x-12 text-xs text-gray-600 font-bold uppercase tracking-widest">
-                <a href="#" class="hover:text-white transition">Alabama</a> <a href="#" class="hover:text-white transition">Alaska</a>
-                <a href="#" class="hover:text-white transition">California</a> <a href="#" class="hover:text-white transition">Florida</a>
-                <a href="#" class="hover:text-white transition">Texas</a> <a href="#" class="hover:text-white transition">Georgia</a>
-                <a href="#" class="hover:text-white transition">New York</a> <a href="#" class="hover:text-white transition">Arizona</a>
-                <a href="#" class="hover:text-white transition">Colorado</a> <a href="#" class="hover:text-white transition">Nevada</a>
-                <a href="#" class="hover:text-white transition">Virginia</a> <a href="#" class="hover:text-white transition">Ohio</a>
-                <a href="#" class="hover:text-white transition">Michigan</a> <a href="#" class="hover:text-white transition">Illinois</a>
-                <a href="#" class="hover:text-white transition">Washington</a>
-            </div>
-        </div>
-    </section>
-
-    <footer class="py-20 px-6 border-t border-white/5">
-        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 mb-16">
-            <div>
-                <p class="text-2xl font-extrabold text-blue-500 mb-4">U.S. HOME IMPROVEMENTS</p>
-                <p class="text-gray-500 text-sm max-w-md leading-relaxed">
-                    Connecting homeowners with local pros. We provide a seamless platform for high-quality home transformations across the USA.
-                </p>
+    <footer class="py-20 border-t border-white/5 px-6">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
+            <div class="text-center md:text-left">
+                <p class="text-2xl font-extrabold text-blue-500 tracking-tighter mb-4">U.S. HOME IMPROVEMENTS</p>
+                <div class="flex gap-4 grayscale opacity-40 hover:opacity-100 transition justify-center md:justify-start">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Better_Business_Bureau_logo.svg/1200px-Better_Business_Bureau_logo.svg.png" class="h-6 invert" alt="BBB">
+                </div>
             </div>
             <div class="flex flex-col md:items-end">
-                <p class="text-xs font-bold uppercase tracking-widest text-white mb-4 italic">Contact Support</p>
-                <a href="mailto:ushomeimprovement07@gmail.com" class="text-blue-400 text-lg font-bold hover:underline tracking-tight italic">
-                    ushomeimprovement07@gmail.com
-                </a>
+                <p class="text-[9px] font-bold uppercase tracking-[0.3em] text-gray-500 mb-2">Corporate Support</p>
+                <a href="mailto:ushomeimprovement07@gmail.com" class="text-blue-400 text-lg font-bold hover:underline italic">ushomeimprovement07@gmail.com</a>
             </div>
         </div>
-        <div class="text-center pt-10 border-t border-white/5">
-            <p class="text-[9px] text-gray-700 font-bold uppercase tracking-[0.5em]">© 2026 National Contractor Network | Licensed & Insured</p>
+        <div class="mt-20 text-center">
+            <p class="text-[8px] text-gray-700 font-bold uppercase tracking-[0.5em]">© 2026 U.S. HOME IMPROVEMENTS | NATIONAL LICENSE US-770821-B | 50 STATE COVERAGE</p>
         </div>
     </footer>
 
@@ -175,9 +154,10 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        document.getElementById('finalLeadForm').addEventListener('submit', async (e) => {
+        document.getElementById('premiumForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const btn = e.target.querySelector('button[submit]');
+            const btn = e.target.querySelector('button[type="submit"]');
+            btn.innerText = "Securing Lead...";
             const data = {
                 service: document.getElementById('selectedService').value,
                 zip: document.getElementById('zip').value,
@@ -188,9 +168,9 @@
             };
             try {
                 await addDoc(collection(db, "leads"), data);
-                alert("Success! Your free estimate request has been sent.");
+                alert("Verified! A licensed pro will contact you shortly.");
                 location.reload();
-            } catch(e) { alert("Error! Check Firebase Firestore Rules."); }
+            } catch(err) { alert("Security Error! Check connection."); }
         });
     </script>
 
@@ -198,12 +178,11 @@
         function move(s) {
             document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
             document.getElementById('step' + s).classList.add('active');
-            document.getElementById('progress').style.width = (s * 33.3) + "%";
         }
         function setVal(t, v, n) {
             if(!document.getElementById('selectedService')) {
                 const h = document.createElement("input"); h.type="hidden"; h.id="selectedService";
-                document.getElementById('finalLeadForm').appendChild(h);
+                document.getElementById('premiumForm').appendChild(h);
             }
             document.getElementById('selectedService').value = v;
             move(n);
