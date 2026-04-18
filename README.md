@@ -2,155 +2,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>U.S. HOME IMPROVEMENT | National Matrix</title>
+    <title>U.S. Home Improvement | National Service Network</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 
     <style>
-        :root { --brand: #1e40af; --accent: #0ea5e9; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f8fafc; color: #0f172a; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background-color: #fcfcfc; color: #1a1a1a; margin: 0; }
         
-        .hero-gradient { background: linear-gradient(135deg, #1e40af 0%, #0369a1 100%); }
+        /* Corporate Header Styling */
+        .nav-bar { background: white; border-bottom: 1px solid #eee; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
         
-        .step-container { display: none; }
-        .step-container.active { display: block; animation: fadeIn 0.5s ease-in-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        /* Clean Matrix Form */
+        .step-panel { display: none; }
+        .step-panel.active { display: block; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 2rem;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
-        }
+        .form-container { background: white; border: 1px solid #e5e7eb; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        
+        .input-box { width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 15px; margin-top: 5px; outline-color: #2563eb; }
+        
+        .btn-primary { background: #1e3a8a; color: white; padding: 14px; border-radius: 6px; font-weight: 700; width: 100%; cursor: pointer; transition: 0.2s; border: none; }
+        .btn-primary:hover { background: #1e40af; }
 
-        .input-field {
-            width: 100%; padding: 1rem; border-radius: 1rem; border: 2px solid #e2e8f0;
-            font-weight: 600; outline: none; transition: 0.3s;
-        }
-        .input-field:focus { border-color: var(--brand); box-shadow: 0 0 0 4px rgba(30, 64, 175, 0.1); }
-
-        .primary-btn {
-            background: var(--brand); color: white; padding: 1.2rem; border-radius: 1rem;
-            font-weight: 800; text-transform: uppercase; letter-spacing: 1px; width: 100%; transition: 0.3s;
-        }
-        .primary-btn:hover { background: #1e3a8a; transform: translateY(-2px); }
+        /* Trusted Grid Fix */
+        .service-grid { display: grid; grid-cols: 2; gap: 15px; padding: 20px; }
+        .service-item { background: white; border: 1px solid #efefef; border-radius: 10px; text-align: center; padding-bottom: 15px; overflow: hidden; }
+        .service-item img { width: 100%; height: 120px; object-fit: cover; }
+        .service-item h4 { font-size: 11px; font-weight: 800; color: #374151; margin-top: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
     </style>
 </head>
 <body>
 
-    <nav class="bg-white border-b sticky top-0 z-50 py-4 px-6 flex justify-between items-center">
+    <nav class="nav-bar">
         <div class="flex items-center gap-2">
-            <img src="./WA_1776550450872.jpeg" class="h-10 w-10 rounded-full border shadow-sm">
-            <span onclick="handleAdminTap()" class="font-extrabold tracking-tighter uppercase text-sm cursor-pointer select-none">U.S. Home Improvement</span>
+            <img src="./WA_1776550450872.jpeg" class="h-8 w-8 rounded-full border shadow-sm">
+            <span onclick="handleAdminTap()" class="font-bold text-sm tracking-tight cursor-pointer uppercase">U.S. Home Improvement</span>
         </div>
-        <div class="text-[10px] font-bold text-blue-600 uppercase tracking-widest hidden md:block">Verified Enterprise 2026</div>
+        <div class="text-[9px] font-bold text-blue-700 bg-blue-50 px-2 py-1 rounded">EST. 2026</div>
     </nav>
 
-    <header class="hero-gradient py-16 text-center px-6 text-white">
-        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-4 uppercase">Quality Excellence</h1>
-        <p class="text-blue-100 text-xs font-bold uppercase tracking-[0.4em]">National Certified Contractor Network</p>
-    </header>
-
-    <main class="max-w-xl mx-auto -mt-12 px-4 mb-20">
-        <div class="glass-card p-8 md:p-12">
-            <div id="formStatus" class="text-center mb-8">
-                <span class="bg-blue-100 text-blue-700 px-4 py-1 rounded-full text-[10px] font-black uppercase">Official Quote Portal</span>
+    <div class="bg-slate-50 py-10 px-4">
+        <div class="max-w-md mx-auto">
+            <div class="text-center mb-6">
+                <h2 class="text-2xl font-extrabold text-slate-900">National Quote Matrix</h2>
+                <p class="text-slate-500 text-xs mt-1">Authorized Contractor Appointment System</p>
             </div>
 
-            <form id="mainLeadForm">
-                <div class="step-container active" id="step1">
-                    <div class="space-y-4">
-                        <select id="service" class="input-field" required>
-                            <option value="">Choose Service...</option>
+            <div class="form-container p-6">
+                <form id="proForm">
+                    <div class="step-panel active" id="s1">
+                        <label class="text-xs font-bold text-slate-600">Select Project Type</label>
+                        <select id="service" class="input-box mb-4" required>
                             <option value="Windows">Replacement Windows</option>
                             <option value="Roofing">Architectural Roofing</option>
-                            <option value="Solar">Solar Energy Matrix</option>
+                            <option value="Solar">Solar Energy Hub</option>
                             <option value="Kitchen">Kitchen Remodeling</option>
-                            <option value="Bathroom">Bathroom Renovation</option>
                         </select>
-                        <input type="text" id="cName" placeholder="Full Legal Name" class="input-field" required>
-                        <input type="email" id="cEmail" placeholder="Email Address" class="input-field" required>
-                        <button type="button" onclick="nextStep('step2')" class="primary-btn">Next: Location</button>
+                        <input type="text" id="cName" placeholder="Full Legal Name" class="input-box mb-4" required>
+                        <button type="button" onclick="goNext('s2')" class="btn-primary mt-2">Continue</button>
                     </div>
-                </div>
 
-                <div class="step-container" id="step2">
-                    <div class="space-y-4">
-                        <input type="text" id="address" placeholder="Street Address" class="input-field" required>
-                        <div class="grid grid-cols-2 gap-4">
-                            <input type="text" id="cZip" placeholder="Zip Code" class="input-field" required>
-                            <select id="owner" class="input-field" required>
-                                <option value="">Ownership?</option>
+                    <div class="step-panel" id="s2">
+                        <input type="text" id="address" placeholder="Street Address" class="input-box mb-4" required>
+                        <div class="flex gap-4 mb-4">
+                            <input type="text" id="cZip" placeholder="Zip Code" class="input-box" required>
+                            <select id="owner" class="input-box" required>
                                 <option value="Homeowner">Homeowner</option>
                                 <option value="Tenant">Tenant</option>
                             </select>
                         </div>
-                        <select id="credit" class="input-field" required>
-                            <option value="">Credit Score?</option>
-                            <option value="Excellent">720+ Excellent</option>
-                            <option value="Good">660-719 Good</option>
-                            <option value="Fair">Fair Profile</option>
-                        </select>
-                        <button type="button" onclick="nextStep('step3')" class="primary-btn">Next: Schedule</button>
+                        <button type="button" onclick="goNext('s3')" class="btn-primary">Next Step</button>
                     </div>
-                </div>
 
-                <div class="step-container" id="step3">
-                    <div class="space-y-4">
-                        <div class="grid grid-cols-2 gap-4">
-                            <input type="date" id="appDate" class="input-field" required>
-                            <select id="appTime" class="input-field" required>
+                    <div class="step-panel" id="s3">
+                        <div class="flex gap-4 mb-4">
+                            <input type="date" id="appDate" class="input-box" required>
+                            <select id="appTime" class="input-box" required>
                                 <option value="Morning">Morning</option>
                                 <option value="Afternoon">Afternoon</option>
-                                <option value="Evening">Evening</option>
                             </select>
                         </div>
-                        <input type="tel" id="cPhone" placeholder="Phone Number" class="input-field" required>
-                        <button type="submit" class="primary-btn !bg-blue-700">Authorize Quote</button>
+                        <input type="tel" id="cPhone" placeholder="Mobile Contact Number" class="input-box mb-4" required>
+                        <button type="submit" class="btn-primary">Finalize Booking</button>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
-    </main>
+    </div>
 
-    <section class="max-w-5xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6 mb-20">
-        <div class="bg-white p-4 rounded-3xl border text-center shadow-sm">
-            <img src="./WA_1776549555727.jpeg" class="rounded-2xl mb-4 w-full h-32 object-cover">
-            <h4 class="font-bold text-[10px] uppercase">Windows</h4>
-        </div>
-        <div class="bg-white p-4 rounded-3xl border text-center shadow-sm">
-            <img src="./WA_1776549716792.jpeg" class="rounded-2xl mb-4 w-full h-32 object-cover">
-            <h4 class="font-bold text-[10px] uppercase">Roofing</h4>
-        </div>
-        <div class="bg-white p-4 rounded-3xl border text-center shadow-sm">
-            <img src="./WA_1776549781247.jpeg" class="rounded-2xl mb-4 w-full h-32 object-cover">
-            <h4 class="font-bold text-[10px] uppercase">Solar Hub</h4>
-        </div>
-        <div class="bg-white p-4 rounded-3xl border text-center shadow-sm">
-            <img src="./WA_1776549862258.jpeg" class="rounded-2xl mb-4 w-full h-32 object-cover">
-            <h4 class="font-bold text-[10px] uppercase">Kitchen</h4>
-        </div>
-    </section>
+    <div class="grid grid-cols-2 gap-4 px-4 py-8 max-w-md mx-auto">
+        <div class="service-item"><img src="./WA_1776549555727.jpeg"><h4>Windows</h4></div>
+        <div class="service-item"><img src="./WA_1776549716792.jpeg"><h4>Roofing</h4></div>
+        <div class="service-item"><img src="./WA_1776549781247.jpeg"><h4>Solar Hub</h4></div>
+        <div class="service-item"><img src="./WA_1776549862258.jpeg"><h4>Kitchen</h4></div>
+    </div>
 
-    <footer class="bg-slate-900 py-12 text-center text-white/40">
-        <p class="text-[10px] font-bold tracking-[0.4em] uppercase mb-2">U.S. Home Improvement • National Enterprise</p>
-        <p class="text-[8px] uppercase tracking-widest">© 2026 Certified Contractor Network. All Rights Reserved.</p>
+    <footer class="bg-white border-t py-10 text-center text-slate-400">
+        <p class="text-[9px] font-bold tracking-widest uppercase mb-1">U.S. Home Improvement • Nationwide Network</p>
+        <p class="text-[8px] uppercase">Official Certified Contractor Portal © 2026</p>
     </footer>
 
-    <div id="adminPanel" class="fixed inset-0 bg-white z-[100] p-6 hidden overflow-y-auto">
-        <div class="max-w-4xl mx-auto">
-            <div class="flex justify-between items-center mb-8 pb-4 border-b">
-                <h2 class="text-2xl font-black uppercase italic">HQ Lead Matrix</h2>
-                <button onclick="closeAdmin()" class="text-red-500 font-bold text-xs">EXIT</button>
-            </div>
-            <div id="auth" class="text-center py-12">
-                <input type="password" id="pin" class="input-field max-w-xs text-center text-4xl mb-4" placeholder="****">
-                <button onclick="unlock()" class="primary-btn max-w-xs mx-auto block">Unlock Matrix</button>
-            </div>
-            <div id="leads" class="hidden space-y-4 pb-20"></div>
+    <div id="adminPanel" class="fixed inset-0 bg-white z-[200] p-6 hidden overflow-y-auto">
+        <div class="flex justify-between border-b pb-4 mb-6">
+            <h3 class="font-bold uppercase italic">Admin Terminal</h3>
+            <button onclick="closeAdmin()" class="text-red-500 font-bold text-xs">EXIT</button>
         </div>
+        <div id="auth" class="text-center py-10">
+            <input type="password" id="pin" class="input-box max-w-[200px] text-center mb-4" placeholder="PIN">
+            <button onclick="unlock()" class="btn-primary max-w-[200px]">Unlock</button>
+        </div>
+        <div id="leads" class="hidden space-y-4 pb-20"></div>
     </div>
 
     <script>
@@ -166,33 +129,30 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
 
-        function nextStep(id) {
-            document.querySelectorAll('.step-container').forEach(s => s.classList.remove('active'));
+        function goNext(id) {
+            document.querySelectorAll('.step-panel').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
         }
 
-        document.getElementById('mainLeadForm').addEventListener('submit', (e) => {
+        document.getElementById('proForm').addEventListener('submit', (e) => {
             e.preventDefault();
             const data = {
                 service: document.getElementById('service').value,
                 name: document.getElementById('cName').value,
-                email: document.getElementById('cEmail').value,
                 address: document.getElementById('address').value,
                 zip: document.getElementById('cZip').value,
                 owner: document.getElementById('owner').value,
-                credit: document.getElementById('credit').value,
                 appDate: document.getElementById('appDate').value,
                 appTime: document.getElementById('appTime').value,
                 phone: document.getElementById('cPhone').value,
                 timestamp: new Date().toLocaleString()
             };
             db.ref('leads').push(data).then(() => {
-                alert("Success! Your consultation is scheduled.");
+                alert("Appointment Scheduled Successfully!");
                 location.reload();
             });
         });
 
-        // Admin Protocol
         let taps = 0, timer;
         function handleAdminTap() {
             taps++; clearTimeout(timer);
@@ -210,19 +170,16 @@
             db.ref('leads').on('value', snap => {
                 const data = snap.val(); let h = '';
                 for(let k in data) {
-                    h += `<div class="p-6 border rounded-3xl bg-slate-50 relative">
-                        <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-[8px] font-black uppercase absolute top-4 right-4">${data[k].service}</span>
-                        <h4 class="text-xl font-bold text-slate-900">${data[k].name}</h4>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-4 text-[10px] font-bold text-slate-500 uppercase">
-                            <p>📞 Phone: <span class="text-slate-900">${data[k].phone}</span></p>
-                            <p>📧 Email: <span class="text-slate-900">${data[k].email}</span></p>
-                            <p>📍 Address: <span class="text-slate-900">${data[k].address}, ${data[k].zip}</span></p>
-                            <p>📅 Appt: <span class="text-blue-700">${data[k].appDate} (${data[k].appTime})</span></p>
-                        </div>
-                        <button onclick="del('${k}')" class="mt-4 text-red-500 font-black text-[9px] uppercase">Delete Record</button>
+                    h += `<div class="p-4 border rounded-lg bg-slate-50 mb-4 text-[11px] font-bold">
+                        <p class="text-blue-600 uppercase mb-2">${data[k].service}</p>
+                        <p>NAME: ${data[k].name}</p>
+                        <p>PHONE: ${data[k].phone}</p>
+                        <p>ADDR: ${data[k].address}, ${data[k].zip}</p>
+                        <p>APPT: ${data[k].appDate} (${data[k].appTime})</p>
+                        <button onclick="del('${k}')" class="text-red-500 mt-2 uppercase">Delete</button>
                     </div>`;
                 }
-                document.getElementById('leads').innerHTML = h || 'No Active Leads';
+                document.getElementById('leads').innerHTML = h || 'No Leads';
             });
         }
         function del(id) { if(confirm('Delete?')) db.ref('leads/'+id).remove(); }
