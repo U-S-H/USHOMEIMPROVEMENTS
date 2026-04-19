@@ -21,7 +21,7 @@
         .glass-card { background: white; border: 1px solid #e2e8f0; border-radius: 24px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
         .input-pro { width: 100%; padding: 14px; border: 2px solid #f1f5f9; border-radius: 12px; font-weight: 600; font-size: 15px; outline: none; }
         .input-pro:focus { border-color: var(--accent); background: #f0f7ff; }
-        .btn-action { background: var(--primary); color: white; padding: 18px; border-radius: 12px; font-weight: 800; text-transform: uppercase; width: 100%; cursor: pointer; }
+        .btn-action { background: var(--primary); color: white; padding: 18px; border-radius: 12px; font-weight: 800; text-transform: uppercase; width: 100%; cursor: pointer; border: none; }
 
         .grid-matrix { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; padding: 20px; }
         .matrix-card { background: white; border-radius: 20px; overflow: hidden; border: 1px solid #f1f5f9; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); text-align: center; }
@@ -125,11 +125,12 @@
         <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-12 text-[10px] font-bold uppercase text-slate-400">
             <div>
                 <h4 class="text-blue-400 mb-4">National Authorization</h4>
-                <p>Licensed nationwide across all states. All contractors are verified for quality and compliance.</p>
+                <p class="mb-2">Licensed nationwide across all states. All contractors are verified for quality and compliance.</p>
+                <p class="text-blue-200 lowercase">ushomeimprovement07@gmail.com</p>
             </div>
             <div class="flex flex-col gap-2">
-                <span onclick="alert('Privacy Secured')">Privacy Policy</span>
-                <span onclick="alert('Terms Verified')">Terms of Service</span>
+                <span onclick="alert('Privacy Secured')" class="cursor-pointer">Privacy Policy</span>
+                <span onclick="alert('Terms Verified')" class="cursor-pointer">Terms of Service</span>
                 <span class="text-slate-600 mt-4 tracking-widest">EST. 2026 MATRIX HUB</span>
             </div>
         </div>
@@ -195,7 +196,7 @@
                 appTime: document.getElementById('appTime').value,
                 timestamp: new Date().toLocaleString()
             };
-            db.ref('leads').push(data).then(() => { alert("Authorized!"); location.reload(); });
+            db.ref('leads').push(data).then(() => { alert("Authorized! Our agent will contact you soon."); location.reload(); });
         });
 
         function toggleAdmin() { document.getElementById('adminPanel').classList.toggle('hidden'); }
