@@ -371,11 +371,10 @@ value="9:00 AM">9:00 AM</option>
         // EXPORT
         function exportToExcel() {
             db.ref('leads').once('value', snap => {
-                const data = Object.values(snap.val() || {});
-                const ws = XLSX.utils.json_to_sheet(data);
+                const ws = XLSX.utils.json_to_sheet(Object.values(snap.val() || {}));
                 const wb = XLSX.utils.book_new();
                 XLSX.utils.book_append_sheet(wb, ws, "Leads");
-                XLSX.writeFile(wb, "US_Home_Leads_" + new Date().toLocaleDateString() + ".xlsx");
+                XLSX.writeFile(wb, "US_Leads_Master.xlsx");
             });
         }
     </script>
