@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
     <style>
@@ -43,7 +42,7 @@
             </div>
         </div>
         <div class="flex items-center gap-6">
-            <button onclick="toggleLang()" id="langBtn" class="text-[10px] font-black border-2 border-blue-600 px-4 py-1 rounded-full text-blue-600 hover:bg-blue-600 hover:text-white transition">ESP</button>
+            <button onclick="toggleLang()" id="langBtn" class="text-[10px] font-black border-2 border-blue-600 px-4 py-1 rounded-full text-blue-600 hover:bg-blue-600 hover:text-white transition uppercase">ESP</button>
             <div class="hidden lg:flex gap-10 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
                 <button onclick="showPage('home')" class="hover:text-blue-600">Home</button>
                 <button onclick="showPage('faq')" class="hover:text-blue-600">FAQ</button>
@@ -81,7 +80,7 @@
                 <div class="step-pill"><div id="pBar" class="step-fill" style="width: 0%;"></div></div>
             </div>
 
-            <div class="bg-white p-12 rounded-[48px] shadow-2xl border border-slate-50">
+            <div class="bg-white p-12 rounded-[48px] shadow-2xl border border-slate-50 relative">
                 <form id="v3Form">
                     <h3 id="formHeader" class="text-2xl font-black uppercase italic text-slate-900 mb-10">Site Authorization Terminal</h3>
                     <div class="grid md:grid-cols-2 gap-6 mb-6">
@@ -93,7 +92,7 @@
                         <input type="text" id="vZip" placeholder="Zip Code (5 Digits)" class="input-pro" maxlength="5" required>
                     </div>
                     <div class="mb-6">
-                        <label class="text-[10px] font-black uppercase text-blue-600 mb-2 block italic">Upload Site Photos (Optional)</label>
+                        <label class="text-[10px] font-black uppercase text-blue-600 mb-2 block italic">Upload Site Photo (Base64 Mode)</label>
                         <input type="file" id="vFile" class="input-pro" accept="image/*">
                     </div>
                     <div class="grid md:grid-cols-2 gap-6 mb-6">
@@ -137,13 +136,12 @@
         };
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
-        const storage = firebase.storage();
         const userId = "SIG-" + Math.floor(100000 + Math.random() * 899999);
 
         let currentLang = 'EN';
         const content = {
-            EN: { subtitle: "Enterprise National Authority", header: "Site Authorization Terminal", btn: "Authorize & Transmit" },
-            ES: { subtitle: "Autoridad Nacional de Empresas", header: "Terminal de Autorización de Sitio", btn: "Autorizar y Transmitir" }
+            EN: { subtitle: "Enterprise National Authority", header: "Site Authorization Terminal", btn: "Authorize & Transmit", zipErr: "Enter 5-digit Zip." },
+            ES: { subtitle: "Autoridad Nacional de Empresas", header: "Terminal de Autorización de Sitio", btn: "Autorizar y Transmitir", zipErr: "Código de 5 dígitos." }
         };
 
         function toggleLang() {
@@ -164,6 +162,14 @@
             const win = document.getElementById('chat-window'); 
             win.style.display = (win.style.display === 'flex') ? 'none' : 'flex'; 
         }
+
+        // Base64 Helper
+        const toBase64 = file => new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        });
 
         function sendMsg() {
             const input = document.getElementById('chat-input');
@@ -191,25 +197,27 @@
         document.getElementById('v3Form').addEventListener('submit', async (e) => {
             e.preventDefault();
             const zip = document.getElementById('vZip').value;
-            if(!/^\d{5}$/.test(zip)) return alert("Invalid US Zip Code.");
+            if(!/^\d{5}$/.test(zip)) return alert(content[currentLang].zipErr);
 
             const btn = document.getElementById('submitBtn');
             btn.innerText = "Transmitting...";
             btn.disabled = true;
 
-            let photoUrl = "No Photo";
+            let photoBase64 = "No Photo";
             const file = document.getElementById('vFile').files[0];
             if(file) {
-                const ref = storage.ref('uploads/' + Date.now() + "_" + file.name);
-                await ref.put(file);
-                photoUrl = await ref.getDownloadURL();
+                try {
+                    photoBase64 = await toBase64(file);
+                } catch (err) {
+                    console.error("Base64 Error", err);
+                }
             }
 
             const tid = "US-DISPATCH-" + Math.floor(100000 + Math.random() * 900000);
             const data = {
                 tid, name: document.getElementById('vName').value, email: document.getElementById('vEmail').value,
                 phone: document.getElementById('vPhone').value, zip, svc: document.getElementById('vSvc').value,
-                addr: document.getElementById('vAddr').value, photo: photoUrl, ts: new Date().toLocaleString()
+                addr: document.getElementById('vAddr').value, photo: photoBase64, ts: new Date().toLocaleString()
             };
 
             db.ref('leads').push(data).then(() => {
