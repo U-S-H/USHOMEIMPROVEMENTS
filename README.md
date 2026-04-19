@@ -137,7 +137,7 @@
                     <div class="grid md:grid-cols-2 gap-6 mb-6">
                         <input type="date" id="vDate" class="input-pro" required>
                         <select id="vTime" class="input-pro" required>
-                            <option value="">Prefer Window (10AM - 7PM)</option>
+                            <option value="">Prefer Time (10AM - 7PM)</option>
                             <option value="10:00 AM">10:00 AM</option>
                             <option value="12:00 PM">12:00 PM</option>
                             <option value="03:00 PM">03:00 PM</option>
