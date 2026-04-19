@@ -2,185 +2,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>U.S. HOME IMPROVEMENT | National Authorized Matrix</title>
+    <title>U.S. HOME IMPROVEMENT | Professional National Network</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 
     <style>
-        :root { --primary: #0f172a; --accent: #2563eb; --gold: #f59e0b; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #fdfdfd; color: var(--primary); }
+        :root { --neon-blue: #2563eb; --neon-cyan: #06b6d4; --glass: rgba(255, 255, 255, 0.8); }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f0f4f8; color: #1e293b; overflow-x: hidden; }
         
-        .hero-section { background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=2069&auto=format&fit=crop'); background-size: cover; background-position: center; color: white; padding: 100px 20px; text-align: center; }
+        /* Modern Neon Effects */
+        .neon-glow { box-shadow: 0 0 20px rgba(37, 99, 235, 0.15); border: 1px solid rgba(37, 99, 235, 0.2); }
+        .neon-text { color: var(--neon-blue); text-shadow: 0 0 8px rgba(37, 99, 235, 0.3); }
         
-        .glass-form { background: white; border-radius: 30px; border: 1px solid #e2e8f0; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); padding: 40px; margin-top: -60px; position: relative; z-index: 10; }
-        
-        .step-content { display: none; }
-        .step-content.active { display: block; animation: fadeInUp 0.5s ease; }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .hero-gradient { background: radial-gradient(circle at top right, #eff6ff, #ffffff); position: relative; padding: 120px 20px; }
+        .hero-gradient::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('https://www.transparenttextures.com/patterns/cubes.png'); opacity: 0.05; }
 
-        .input-premium { width: 100%; padding: 16px; border: 2px solid #f1f5f9; border-radius: 15px; font-weight: 600; margin-bottom: 20px; outline: none; transition: 0.3s; background: #f8fafc; }
-        .input-premium:focus { border-color: var(--accent); background: white; box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); }
+        .glass-card { background: var(--glass); backdrop-filter: blur(12px); border-radius: 32px; border: 1px solid rgba(255,255,255,0.4); box-shadow: 0 30px 60px -12px rgba(0,0,0,0.08); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .glass-card:hover { transform: translateY(-5px); box-shadow: 0 40px 80px -15px rgba(37, 99, 235, 0.1); }
+
+        .step-form { display: none; }
+        .step-form.active { display: block; animation: slideIn 0.6s ease-out; }
+        @keyframes slideIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+
+        .input-pro { width: 100%; padding: 18px; border: 2px solid #e2e8f0; border-radius: 16px; font-weight: 600; transition: 0.3s; background: white; margin-bottom: 15px; }
+        .input-pro:focus { border-color: var(--neon-blue); box-shadow: 0 0 15px rgba(37, 99, 235, 0.1); outline: none; }
         
-        .btn-premium { background: var(--accent); color: white; padding: 20px; border-radius: 15px; font-weight: 800; text-transform: uppercase; width: 100%; cursor: pointer; border: none; letter-spacing: 1px; }
-        .btn-premium:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3); }
-
-        .service-card { border-radius: 20px; overflow: hidden; border: 1px solid #f1f5f9; background: white; transition: 0.3s; }
-        .service-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05); }
-        .service-card img { width: 100%; height: 160px; object-fit: cover; }
-        .service-card h4 { font-weight: 800; text-transform: uppercase; font-size: 12px; padding: 15px; color: var(--primary); }
-
-        .trust-badge { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.1); padding: 8px 16px; border-radius: 50px; font-size: 10px; font-weight: 700; border: 1px solid rgba(255,255,255,0.2); }
+        .btn-action { background: linear-gradient(135deg, var(--neon-blue), var(--neon-cyan)); color: white; padding: 20px; border-radius: 16px; font-weight: 800; text-transform: uppercase; width: 100%; cursor: pointer; border: none; letter-spacing: 1px; }
+        
+        .matrix-card { background: white; border-radius: 24px; overflow: hidden; border: 1px solid #f1f5f9; transition: 0.4s; }
+        .matrix-card:hover { transform: scale(1.03) rotate(1deg); box-shadow: 0 20px 30px rgba(0,0,0,0.05); }
+        .matrix-card img { width: 100%; height: 140px; object-fit: cover; }
+        
+        .badge-live { display: inline-flex; align-items: center; gap: 6px; background: #ecfdf5; color: #059669; padding: 4px 12px; border-radius: 50px; font-size: 10px; font-weight: 800; }
     </style>
 </head>
 <body>
 
-    <nav class="bg-white border-b px-8 py-5 flex justify-between items-center sticky top-0 z-[1000]">
-        <div class="flex items-center gap-4">
-            <img src="./WA_1776550450872.jpeg" class="h-12 w-12 rounded-xl shadow-md border">
+    <nav class="bg-white/80 backdrop-blur-md border-b px-8 py-4 flex justify-between items-center sticky top-0 z-[1000]">
+        <div class="flex items-center gap-3">
+            <img src="./WA_1776550450872.jpeg" class="h-11 w-11 rounded-2xl shadow-lg border">
             <div>
-                <span onclick="toggleAdmin()" class="block font-black text-sm uppercase tracking-tighter cursor-pointer">U.S. Home Improvement</span>
-                <span class="block text-[9px] font-bold text-emerald-600 uppercase">● Licensed National Enterprise</span>
+                <span onclick="toggleAdmin()" class="block font-black text-sm uppercase tracking-tighter cursor-pointer neon-text">U.S. Home Improvement</span>
+                <div class="badge-live uppercase">● Verified 50-State Network</div>
             </div>
         </div>
-        <div class="hidden md:flex gap-6 text-[11px] font-black uppercase text-slate-400">
-            <span>California HQ</span>
+        <div class="hidden lg:flex gap-8 text-[11px] font-extrabold uppercase text-slate-400 tracking-widest">
+            <span>California Hub</span>
+            <span class="text-blue-600">Licensed Experts</span>
             <span>Est. 2026</span>
-            <span class="text-blue-600">Nationwide Coverage</span>
         </div>
     </nav>
 
-    <header class="hero-section">
-        <div class="max-w-4xl mx-auto">
-            <div class="flex justify-center mb-6"><div class="trust-badge uppercase">National Matrix Hub • Verified Network</div></div>
-            <h1 class="text-4xl md:text-6xl font-black uppercase italic tracking-tighter mb-6">Upgrade Your Home <br> With Zero Hassle</h1>
-            <p class="text-slate-300 font-medium text-lg max-w-2xl mx-auto">Authorized national network connecting you with licensed professionals for premium roofing, solar, and remodeling.</p>
+    <header class="hero-gradient text-center">
+        <div class="max-w-4xl mx-auto px-6">
+            <h1 class="text-5xl md:text-7xl font-extrabold uppercase italic tracking-tighter mb-6 leading-none">
+                National <span class="neon-text">Upgrade</span> Hub
+            </h1>
+            <p class="text-lg text-slate-500 font-semibold max-w-2xl mx-auto leading-relaxed">
+                Connect with local authorized contractors for premium home improvements. Guaranteed licensing, bonding, and lifetime warranties.
+            </p>
         </div>
     </header>
 
-    <main class="max-w-xl mx-auto px-6 mb-24">
-        <div class="glass-form">
-            <form id="proLeadForm">
-                <div class="step-content active" id="step1">
-                    <h3 class="text-xl font-extrabold mb-6 uppercase italic text-blue-600">01. Choose Service</h3>
-                    <select id="mainService" class="input-premium" onchange="updateDynamicInputs()" required>
-                        <option value="Roofing">Roofing Solutions</option>
-                        <option value="Solar">Solar Power Matrix</option>
+    <main class="max-w-xl mx-auto px-6 -mt-20 mb-32">
+        <div class="glass-card p-10">
+            <form id="trustedForm">
+                <div class="step-form active" id="step1">
+                    <label class="text-[10px] font-black text-blue-500 uppercase block mb-4 tracking-[0.2em]">01. Project Scope</label>
+                    <select id="mainService" class="input-pro" onchange="generateQuestions()" required>
                         <option value="Windows">Windows Replacement</option>
-                        <option value="Doors">Entry & Patio Doors</option>
-                        <option value="Garage">Garage System</option>
-                        <option value="Deck">Custom Decking</option>
-                        <option value="Kitchen">Kitchen Remodel</option>
-                        <option value="Bathroom">Bathroom Remodel</option>
+                        <option value="Roofing">Roofing Installation</option>
+                        <option value="Solar">Solar Matrix System</option>
                         <option value="Siding">Exterior Siding</option>
+                        <option value="Kitchen">Kitchen Remodeling</option>
+                        <option value="Bathroom">Bathroom Luxury Remodel</option>
+                        <option value="Garage">Garage Door Systems</option>
+                        <option value="Deck">Custom Decking</option>
                     </select>
-                    <select id="isOwner" class="input-premium" required>
-                        <option value="">Are you the home owner?</option>
-                        <option value="Yes">Yes, I am the owner</option>
-                        <option value="No">No, I am a tenant</option>
+                    <select id="isOwner" class="input-pro" required>
+                        <option value="Yes">I am the Homeowner</option>
+                        <option value="No">I am a Tenant / Manager</option>
                     </select>
-                    <button type="button" onclick="nextStep('step2')" class="btn-premium">Continue to Qualify</button>
+                    <button type="button" onclick="nextStep('step2')" class="btn-action">Get Free Quote</button>
                 </div>
 
-                <div class="step-content" id="step2">
-                    <h3 class="text-xl font-extrabold mb-6 uppercase italic text-blue-600">02. Qualification</h3>
-                    <div id="dynamicInputs">
-                        </div>
-                    <select id="creditScore" class="input-premium" required>
-                        <option value="">Estimated Credit Score?</option>
-                        <option value="720+">720+ (Excellent)</option>
-                        <option value="660-719">660-719 (Good)</option>
-                        <option value="600-659">600-659 (Fair)</option>
-                        <option value="Manual">Enter Manually...</option>
-                    </select>
-                    <input type="text" id="manualCredit" placeholder="If manual, enter credit score" class="input-premium hidden">
-                    
-                    <button type="button" onclick="nextStep('step3')" class="btn-premium">Set Appointment</button>
+                <div class="step-form" id="step2">
+                    <label class="text-[10px] font-black text-blue-500 uppercase block mb-4 tracking-[0.2em]">02. Technical Assessment</label>
+                    <div id="dynamicContainer"></div>
+                    <button type="button" onclick="nextStep('step3')" class="btn-action">Finalize Details</button>
                 </div>
 
-                <div class="step-content" id="step3">
-                    <h3 class="text-xl font-extrabold mb-6 uppercase italic text-blue-600">03. Final Authorization</h3>
-                    <input type="text" id="custAddress" placeholder="Street Address" class="input-premium" required>
+                <div class="step-form" id="step3">
+                    <label class="text-[10px] font-black text-blue-500 uppercase block mb-4 tracking-[0.2em]">03. Personal Information</label>
+                    <input type="text" id="custName" placeholder="Full Legal Name" class="input-pro" required>
+                    <input type="text" id="custAddress" placeholder="Site Street Address" class="input-pro" required>
                     <div class="grid grid-cols-2 gap-4">
-                        <input type="text" id="custZip" placeholder="Zip Code" class="input-premium" required>
-                        <input type="text" id="custName" placeholder="Full Name" class="input-premium" required>
+                        <input type="text" id="custZip" placeholder="Zip Code" class="input-pro" required>
+                        <input type="tel" id="custPhone" placeholder="Mobile Number" class="input-pro" required>
                     </div>
-                    <input type="email" id="custEmail" placeholder="Email Address" class="input-premium" required>
-                    <input type="tel" id="custPhone" placeholder="Direct Phone Number" class="input-premium" required>
+                    <input type="email" id="custEmail" placeholder="Email for Estimates" class="input-pro" required>
                     
                     <div class="grid grid-cols-2 gap-4">
-                        <input type="date" id="appDate" class="input-premium" required>
-                        <select id="appTime" class="input-premium" required>
-                            <option value="Morning (9AM-12PM)">Morning</option>
-                            <option value="Afternoon (1PM-5PM)">Afternoon</option>
+                        <input type="date" id="appDate" class="input-pro" required>
+                        <select id="appTime" class="input-pro" required>
+                            <option value="Morning">Morning Window</option>
+                            <option value="Afternoon">Afternoon Window</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn-premium">Confirm Appointment</button>
+                    <button type="submit" class="btn-action">Authorize Local Dispatch</button>
                 </div>
             </form>
         </div>
     </main>
 
-    <section class="max-w-5xl mx-auto px-8 mb-32">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl font-black uppercase italic tracking-tighter">Enterprise Solutions</h2>
-            <p class="text-slate-400 font-bold uppercase text-[10px] tracking-[0.4em] mt-2">Licensed Nationwide Specialists</p>
-        </div>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div class="service-card"><img src="./WA_1776549716792.jpeg"><h4>Roofing</h4></div>
-            <div class="service-card"><img src="./WA_1776549781247.jpeg"><h4>Solar Panels</h4></div>
-            <div class="service-card"><img src="./WA_1776549555727.jpeg"><h4>Windows</h4></div>
-            <div class="service-card"><img src="./WA_1776549622236.jpeg"><h4>Doors</h4></div>
-            <div class="service-card"><img src="./WA_1776549862258.jpeg"><h4>Kitchen</h4></div>
-            <div class="service-card"><img src="./WA_1776549917709.jpeg"><h4>Bathroom</h4></div>
-            <div class="service-card"><img src="./WA_1776550066723.jpeg"><h4>Garage</h4></div>
-            <div class="service-card"><img src="./WA_1776549990293.jpeg"><h4>Deck</h4></div>
+    <section class="max-w-5xl mx-auto px-8 mb-40 text-center">
+        <h3 class="font-black text-xs uppercase tracking-[0.5em] text-slate-400 mb-16">Core Matrix Portfolio</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="matrix-card"><img src="./WA_1776549716792.jpeg"><h4>Roofing</h4></div>
+            <div class="matrix-card"><img src="./WA_1776549781247.jpeg"><h4>Solar Power</h4></div>
+            <div class="matrix-card"><img src="./WA_1776549555727.jpeg"><h4>Windows</h4></div>
+            <div class="matrix-card"><img src="./WA_1776549622236.jpeg"><h4>Doors</h4></div>
+            <div class="matrix-card"><img src="./WA_1776549862258.jpeg"><h4>Kitchen</h4></div>
+            <div class="matrix-card"><img src="./WA_1776549917709.jpeg"><h4>Bathroom</h4></div>
+            <div class="matrix-card"><img src="./WA_1776550066723.jpeg"><h4>Garage</h4></div>
+            <div class="matrix-card"><img src="./WA_1776549990293.jpeg"><h4>Deck</h4></div>
         </div>
     </section>
 
-    <footer class="bg-slate-950 py-24 px-8 text-white">
+    <footer class="bg-white border-t py-24 px-8 text-slate-800">
         <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-16">
             <div>
-                <h4 class="text-blue-500 font-black uppercase text-xs mb-6 tracking-widest">National Headquarters</h4>
-                <p class="text-slate-400 font-bold text-sm leading-relaxed">
-                    702 Main Street<br>
-                    Woodland, California 95695<br>
-                    United States
+                <h4 class="font-black uppercase text-xs mb-8 tracking-widest neon-text">U.S. Corporate HQ</h4>
+                <p class="font-bold text-sm leading-relaxed text-slate-500">
+                    702 Main Street, Woodland<br>
+                    California 95695, USA<br>
+                    Licensed Network ID: #CA-786-2026
                 </p>
-                <p class="text-blue-300 mt-4 text-xs font-black lowercase">ushomeimprovement07@gmail.com</p>
+                <p class="mt-4 text-xs font-black lowercase text-blue-600">ushomeimprovement07@gmail.com</p>
             </div>
             <div>
-                <h4 class="text-blue-500 font-black uppercase text-xs mb-6 tracking-widest">Our Promise</h4>
-                <ul class="text-slate-400 font-bold text-xs space-y-3 uppercase">
-                    <li>✓ 50-State Licensing Network</li>
-                    <li>✓ Lifetime Matrix Warranty</li>
-                    <li>✓ Licensed & Bonded Crews</li>
-                    <li>✓ Zero-Down Financing Plans</li>
-                </ul>
+                <h4 class="font-black uppercase text-xs mb-8 tracking-widest text-slate-400">Our Operations</h4>
+                <p class="text-xs font-bold leading-relaxed text-slate-500 uppercase italic">
+                    We operate a nationwide authorized network. Once your appointment is confirmed, our local licensed contractor from your specific state will contact you for a technical site survey.
+                </p>
             </div>
             <div>
-                <h4 class="text-blue-500 font-black uppercase text-xs mb-6 tracking-widest">Legal Portal</h4>
-                <div class="flex flex-col gap-4 text-[10px] font-black uppercase text-slate-500">
-                    <span class="hover:text-white cursor-pointer" onclick="alert('Privacy Encrypted')">Privacy Policy</span>
-                    <span class="hover:text-white cursor-pointer" onclick="alert('Terms Verified')">Terms & Conditions</span>
-                    <span class="mt-4 text-slate-700">© 2026 U.S. Home Improvement Enterprise</span>
+                <h4 class="font-black uppercase text-xs mb-8 tracking-widest text-slate-400">Security & Privacy</h4>
+                <div class="flex flex-col gap-3 text-[10px] font-black uppercase">
+                    <span class="cursor-pointer hover:text-blue-600">Privacy & Data Encryption</span>
+                    <span class="cursor-pointer hover:text-blue-600">Consumer Rights (CCPA)</span>
+                    <span class="text-slate-300 mt-4">© 2026 National Matrix Hub</span>
                 </div>
             </div>
         </div>
     </footer>
 
-    <div id="adminPanel" class="fixed inset-0 bg-white z-[5000] p-8 hidden overflow-y-auto">
-        <div class="flex justify-between items-center border-b pb-6 mb-8">
-            <h2 class="text-2xl font-black uppercase italic">Leads Control Terminal</h2>
-            <button onclick="toggleAdmin()" class="bg-red-50 text-red-600 px-6 py-2 rounded-full font-black text-xs uppercase">Exit</button>
+    <div id="adminPanel" class="fixed inset-0 bg-slate-50 z-[5000] p-8 hidden overflow-y-auto">
+        <div class="flex justify-between items-center border-b pb-6 mb-10">
+            <h2 class="text-2xl font-black uppercase italic tracking-tighter">Matrix Control Center</h2>
+            <button onclick="toggleAdmin()" class="bg-red-50 text-red-600 px-6 py-2 rounded-xl font-black text-xs uppercase">Close</button>
         </div>
-        <div id="authSection" class="text-center py-20">
-            <p class="font-bold text-slate-400 uppercase text-xs mb-4">Enter Authorization PIN</p>
-            <input type="password" id="pin" class="input-premium max-w-[240px] text-center text-2xl tracking-[10px]" placeholder="****">
-            <button onclick="unlockTerminal()" class="btn-premium max-w-[240px] mt-4">Access Terminal</button>
+        <div id="authPanel" class="text-center py-20">
+            <input type="password" id="pin" class="input-pro max-w-[260px] text-center text-3xl" placeholder="PIN">
+            <button onclick="accessTerminal()" class="btn-action max-w-[260px] mt-4">Unlock Admin</button>
         </div>
-        <div id="leadsContainer" class="hidden space-y-6 pb-20"></div>
+        <div id="leadsList" class="hidden grid gap-6 pb-20"></div>
     </div>
 
     <script>
@@ -197,67 +185,71 @@
         const db = firebase.database();
 
         function nextStep(id) {
-            document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.step-form').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
         }
 
-        function updateDynamicInputs() {
-            const s = document.getElementById('mainService').value;
-            const container = document.getElementById('dynamicInputs');
+        function generateQuestions() {
+            const service = document.getElementById('mainService').value;
+            const container = document.getElementById('dynamicContainer');
             let h = '';
 
-            if(s === 'Windows') {
-                h = `<select id="q1" class="input-premium" onchange="toggleManual('q1','m1')">
-                        <option value="">How many windows?</option>
-                        <option value="3-5">3-5 Windows</option>
-                        <option value="6-10">6-10 Windows</option>
-                        <option value="Manual">Enter Manual Amount...</option>
-                    </select>
-                    <input type="text" id="m1" placeholder="Type exact amount of windows" class="input-premium hidden">
-                    <select id="q2" class="input-premium"><option value="">Type of windows?</option><option value="Vinyl">Premium Vinyl</option><option value="Wood">Classic Wood</option></select>`;
-            } else if(s === 'Roofing') {
-                h = `<select id="q1" class="input-premium"><option value="">Current Roof Type?</option><option value="Shingles">Asphalt Shingles</option><option value="Metal">Metal Sheet</option></select>`;
-            } else {
-                h = `<p class="text-xs font-bold text-blue-600 mb-6 uppercase italic">Standard nationwide qualifying applied for ${s}.</p>`;
-            }
+            const items = {
+                'Windows': ['Estimated Window Count', 'Window Frame Material (Vinyl, Wood, etc.)'],
+                'Roofing': ['Current Roof Condition', 'Square Footage (Approx)'],
+                'Solar': ['Monthly Electric Bill', 'Roof Orientation'],
+                'Siding': ['Material Type Wanted', 'Approx Square Footage']
+            };
+
+            const selected = items[service] || ['Project Details', 'Estimated Budget'];
+
+            selected.forEach((q, index) => {
+                h += `<p class="text-[11px] font-black uppercase text-slate-400 mb-2">${q}</p>
+                      <select id="sel${index}" class="input-pro" onchange="toggleM(${index})">
+                        <option value="Standard">Standard Option</option>
+                        <option value="Premium">Premium Upgrade</option>
+                        <option value="Manual">Manual Entry (Specify)...</option>
+                      </select>
+                      <input type="text" id="man${index}" placeholder="Type details here..." class="input-pro hidden">`;
+            });
+
             container.innerHTML = h;
         }
-        updateDynamicInputs();
+        generateQuestions();
 
-        function toggleManual(selectId, manualId) {
-            const s = document.getElementById(selectId);
-            const m = document.getElementById(manualId);
+        function toggleM(idx) {
+            const s = document.getElementById(`sel${idx}`);
+            const m = document.getElementById(`man${idx}`);
             if(s.value === 'Manual') m.classList.remove('hidden'); else m.classList.add('hidden');
         }
 
-        document.getElementById('creditScore').addEventListener('change', function() {
-            const m = document.getElementById('manualCredit');
-            if(this.value === 'Manual') m.classList.remove('hidden'); else m.classList.add('hidden');
-        });
-
-        document.getElementById('proLeadForm').addEventListener('submit', (e) => {
+        document.getElementById('trustedForm').addEventListener('submit', (e) => {
             e.preventDefault();
+            const service = document.getElementById('mainService').value;
             const data = {
-                service: document.getElementById('mainService').value,
-                isOwner: document.getElementById('isOwner').value,
-                credit: document.getElementById('creditScore').value === 'Manual' ? document.getElementById('manualCredit').value : document.getElementById('creditScore').value,
-                details: (document.getElementById('q1')?.value === 'Manual' ? document.getElementById('m1').value : document.getElementById('q1')?.value) || 'Standard',
+                service: service,
+                owner: document.getElementById('isOwner').value,
+                details: `${document.getElementById('sel0')?.value === 'Manual' ? document.getElementById('man0').value : document.getElementById('sel0')?.value} | ${document.getElementById('sel1')?.value === 'Manual' ? document.getElementById('man1').value : document.getElementById('sel1')?.value}`,
                 name: document.getElementById('custName').value,
                 address: document.getElementById('custAddress').value,
                 zip: document.getElementById('custZip').value,
-                email: document.getElementById('custEmail').value,
                 phone: document.getElementById('custPhone').value,
-                appointment: `${document.getElementById('appDate').value} (${document.getElementById('appTime').value})`,
+                email: document.getElementById('custEmail').value,
+                appointment: `${document.getElementById('appDate').value} @ ${document.getElementById('appTime').value}`,
                 timestamp: new Date().toLocaleString()
             };
-            db.ref('leads').push(data).then(() => { alert("Authorization Successful! An agent will call you."); location.reload(); });
+
+            db.ref('leads').push(data).then(() => {
+                alert(`SUCCESS! Your appointment for ${service} is authorized. A local licensed contractor from your area will reach out to you within 24 hours.`);
+                location.reload();
+            });
         });
 
         function toggleAdmin() { document.getElementById('adminPanel').classList.toggle('hidden'); }
-        function unlockTerminal() {
+        function accessTerminal() {
             if(document.getElementById('pin').value === "786") {
-                document.getElementById('authSection').classList.add('hidden');
-                document.getElementById('leadsContainer').classList.remove('hidden');
+                document.getElementById('authPanel').classList.add('hidden');
+                document.getElementById('leadsList').classList.remove('hidden');
                 syncLeads();
             }
         }
@@ -266,32 +258,30 @@
             db.ref('leads').on('value', snap => {
                 const data = snap.val(); let h = '';
                 for(let k in data) {
-                    h += `<div class="p-8 border rounded-3xl bg-slate-50 relative mb-6 shadow-sm border-slate-200">
-                        <span class="bg-blue-600 text-white px-4 py-1.5 rounded-full text-[10px] font-black absolute top-6 right-8 uppercase tracking-widest">${data[k].service}</span>
-                        <h4 class="text-2xl font-black mb-1 uppercase italic">${data[k].name}</h4>
-                        <p class="text-slate-500 font-bold mb-6">📍 ${data[k].address} (${data[k].zip})</p>
-                        <div class="grid grid-cols-2 gap-8 py-6 border-t border-slate-200">
-                            <div>
-                                <p class="text-[9px] font-black text-slate-400 uppercase mb-2">Contact Details</p>
-                                <p class="text-sm font-bold">📞 ${data[k].phone}</p>
-                                <p class="text-sm font-bold">✉️ ${data[k].email}</p>
+                    h += `<div class="p-8 border rounded-3xl bg-white shadow-sm relative">
+                        <span class="bg-blue-600 text-white px-4 py-1.5 rounded-full text-[10px] font-black absolute top-6 right-8 uppercase">${data[k].service}</span>
+                        <h4 class="text-2xl font-black uppercase mb-1">${data[k].name}</h4>
+                        <p class="font-bold text-slate-400 mb-6">📍 ${data[k].address} (${data[k].zip})</p>
+                        <div class="grid md:grid-cols-2 gap-6 py-6 border-t border-slate-100">
+                            <div class="text-[11px] uppercase font-bold text-slate-600">
+                                <p>📞 Phone: ${data[k].phone}</p>
+                                <p>✉️ Email: ${data[k].email}</p>
                             </div>
-                            <div>
-                                <p class="text-[9px] font-black text-slate-400 uppercase mb-2">Qualifying Matrix</p>
-                                <p class="text-sm font-bold uppercase">Owner: ${data[k].isOwner} | Credit: ${data[k].credit}</p>
-                                <p class="text-sm font-bold uppercase text-blue-600">Specs: ${data[k].details}</p>
+                            <div class="text-[11px] uppercase font-bold text-blue-600">
+                                <p>👤 Owner: ${data[k].owner}</p>
+                                <p>🛠 Specs: ${data[k].details}</p>
                             </div>
                         </div>
-                        <div class="bg-blue-50 p-4 rounded-xl flex justify-between items-center mt-2">
-                            <span class="text-[10px] font-black uppercase text-blue-800 tracking-tighter">📅 Appointment: ${data[k].appointment}</span>
-                            <button onclick="deleteLead('${k}')" class="text-red-500 font-black text-[10px] uppercase">Remove</button>
+                        <div class="bg-slate-50 p-4 rounded-2xl flex justify-between items-center">
+                            <span class="text-[10px] font-black uppercase text-slate-500">📅 ${data[k].appointment}</span>
+                            <button onclick="delLead('${k}')" class="text-red-500 font-black text-xs uppercase">Delete</button>
                         </div>
                     </div>`;
                 }
-                document.getElementById('leadsContainer').innerHTML = h || '<p class="text-center py-20 font-bold text-slate-300 uppercase">Terminal Clear - No Leads</p>';
+                document.getElementById('leadsList').innerHTML = h || '<p class="text-center font-bold text-slate-300">Terminal Empty</p>';
             });
         }
-        function deleteLead(id) { if(confirm('Permanently Delete Lead?')) db.ref('leads/'+id).remove(); }
+        function delLead(id) { if(confirm('Delete permanently?')) db.ref('leads/'+id).remove(); }
     </script>
 </body>
 </html>
