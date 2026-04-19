@@ -120,7 +120,9 @@
                             <option value="Solar">Solar Power Matrix</option>
                             <option value="Kitchen">Interior Remodeling</option>
                             <option value="Bathroom">Bathroom Spa Refit</option>
-                            <option value="Gutters">Seamless Gutter System</option>
+                            <option 
+value="Bathroom Remodeling">Siding Repair/Replacement</option>
+                            <option                   value="Gutters">Seamless Gutter System</option>
                         </select>
                     </div>
 
