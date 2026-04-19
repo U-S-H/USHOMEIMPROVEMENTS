@@ -2,176 +2,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>U.S. HOME IMPROVEMENT | National Enterprise Authority</title>
+    <title>U.S. HOME IMPROVEMENT | National Enterprise Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
     <style>
-        :root { --primary: #0f172a; --accent: #2563eb; --gold: #fbbf24; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #fcfcfc; color: #1e293b; scroll-behavior: smooth; overflow-x: hidden; }
+        :root { --primary: #0f172a; --accent: #2563eb; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #fcfcfc; color: #1e293b; scroll-behavior: smooth; }
         
-        .hero-premium { background: linear-gradient(rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.85)), url('https://images.unsplash.com/photo-1513584684374-8bdb7489feef?q=80&w=2070&auto=format&fit=crop'); background-size: cover; background-position: center; }
-        .input-premium { width: 100%; padding: 18px; border: 2px solid #e2e8f0; border-radius: 20px; font-weight: 600; outline: none; transition: 0.4s; background: white; font-size: 14px; }
-        .input-premium:focus { border-color: var(--accent); box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.1); }
-        .btn-master { background: linear-gradient(135deg, #1e3a8a, #2563eb); color: white; padding: 22px; border-radius: 24px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; transition: 0.4s; border: none; cursor: pointer; box-shadow: 0 20px 40px rgba(37, 99, 235, 0.25); }
+        .hero-v5 { background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.8)), url('https://images.unsplash.com/photo-1513584684374-8bdb7489feef?q=80&w=2070&auto=format&fit=crop'); background-size: cover; background-position: center; }
+        .input-premium { width: 100%; padding: 16px; border: 2px solid #e2e8f0; border-radius: 18px; font-weight: 600; outline: none; transition: 0.4s; background: white; font-size: 14px; }
+        .input-premium:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); }
+        .btn-master { background: linear-gradient(135deg, #1e3a8a, #2563eb); color: white; padding: 18px; border-radius: 20px; font-weight: 800; text-transform: uppercase; cursor: pointer; border: none; box-shadow: 0 15px 30px rgba(37, 99, 235, 0.2); }
         .page-section { display: none; }
-        .page-section.active { display: block; animation: slideUp 0.6s ease-out; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .page-section.active { display: block; }
 
-        /* ADVANCED CHAT SYSTEM */
-        #chat-window { position: fixed; bottom: 100px; right: 30px; width: 380px; height: 620px; background: white; border-radius: 35px; box-shadow: 0 40px 80px -20px rgba(0,0,0,0.3); display: none; flex-direction: column; z-index: 9000; overflow: hidden; border: 1px solid #f1f5f9; }
-        .chat-header { background: #0f172a; padding: 25px; color: white; }
-        #chat-feed { flex: 1; padding: 20px; overflow-y: auto; background: #fdfdfd; display: flex; flex-direction: column; gap: 15px; }
-        .bubble { padding: 14px 20px; border-radius: 22px; font-size: 13px; max-width: 85%; line-height: 1.5; font-weight: 500; position: relative; }
-        .bubble-admin { background: #f1f5f9; color: #1e293b; align-self: flex-start; border-bottom-left-radius: 5px; }
-        .bubble-user { background: #2563eb; color: white; align-self: flex-end; border-bottom-right-radius: 5px; }
-        .chat-bot-option { background: white; border: 2px solid #2563eb; color: #2563eb; padding: 12px; border-radius: 50px; font-size: 11px; font-weight: 800; cursor: pointer; text-align: center; transition: 0.3s; }
-        .chat-bot-option:hover { background: #2563eb; color: white; }
+        /* FIXED CHAT ENGINE */
+        #chat-window { position: fixed; bottom: 100px; right: 30px; width: 360px; height: 580px; background: white; border-radius: 30px; box-shadow: 0 40px 80px -20px rgba(0,0,0,0.3); display: none; flex-direction: column; z-index: 9000; overflow: hidden; border: 1px solid #f1f5f9; }
+        .chat-header { background: #0f172a; padding: 20px; color: white; display: flex; justify-content: space-between; align-items: center; }
+        #chat-feed { flex: 1; padding: 15px; overflow-y: auto; background: #fdfdfd; display: flex; flex-direction: column; gap: 10px; }
+        .bubble { padding: 12px 16px; border-radius: 18px; font-size: 13px; max-width: 80%; line-height: 1.4; font-weight: 500; }
+        .bubble-admin { background: #f1f5f9; color: #1e293b; align-self: flex-start; border-bottom-left-radius: 4px; }
+        .bubble-user { background: #2563eb; color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
+        .bot-opt { border: 2px solid #2563eb; color: #2563eb; padding: 8px; border-radius: 50px; font-size: 11px; font-weight: 800; text-align: center; cursor: pointer; transition: 0.3s; margin-top: 5px; }
+        .bot-opt:hover { background: #2563eb; color: white; }
     </style>
 </head>
 <body>
 
-    <nav class="bg-white/95 backdrop-blur sticky top-0 z-[8000] px-8 py-5 flex justify-between items-center border-b">
-        <div class="flex items-center gap-4">
-            <div onclick="handleAdminTap()" class="h-12 w-12 bg-slate-900 rounded-2xl flex items-center justify-center text-white font-black cursor-pointer shadow-xl">US</div>
+    <nav class="bg-white/95 backdrop-blur sticky top-0 z-[8000] px-8 py-4 flex justify-between items-center border-b">
+        <div class="flex items-center gap-4" onclick="handleAdminTap()">
+            <div class="h-10 w-10 bg-slate-900 rounded-xl flex items-center justify-center text-white font-black cursor-pointer shadow-lg">US</div>
             <div>
-                <h1 class="text-xs font-black text-slate-900 uppercase tracking-tighter">U.S. Home Improvement</h1>
-                <div class="flex items-center gap-2">
-                    <span class="h-2 w-2 bg-emerald-500 rounded-full animate-pulse"></span>
-                    <span class="text-[9px] font-bold text-blue-600 uppercase italic">Licensed LLC & BBB Accredited</span>
-                </div>
+                <h1 class="text-[11px] font-black text-slate-900 uppercase">U.S. Home Improvement</h1>
+                <span class="text-[8px] font-bold text-blue-600 uppercase italic">LLC Registered | BBB A+</span>
             </div>
         </div>
-        <button onclick="showPage('form')" class="bg-blue-600 text-white px-8 py-3 rounded-2xl font-black text-[10px] uppercase shadow-lg hover:scale-105 transition">Free Quote</button>
+        <button onclick="showPage('form')" class="bg-blue-600 text-white px-6 py-2 rounded-xl font-black text-[9px] uppercase shadow-lg">Free Quote</button>
     </nav>
 
-    <section id="home" class="page-section active">
-        <header class="hero-premium py-48 px-8 text-center text-white">
-            <span class="bg-blue-600/40 border border-blue-500 px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.3em] mb-10 inline-block">National Coverage | $0 Down Financing</span>
-            <h1 class="text-5xl md:text-8xl font-black uppercase italic tracking-tighter mb-10 leading-none">The Trusted <br><span class="text-blue-500">Choice.</span></h1>
-            <p class="text-slate-300 text-sm font-bold max-w-2xl mx-auto mb-16 uppercase tracking-widest leading-relaxed">No-cost estimates for premium home upgrades. Authorized by nationwide building standards.</p>
-            <div class="flex flex-wrap justify-center gap-6">
-                <button onclick="showPage('form')" class="btn-master px-16">Start Free Survey</button>
-                <button onclick="showPage('about')" class="bg-white/10 backdrop-blur text-white px-10 py-5 rounded-2xl font-black text-[10px] uppercase border border-white/20">Learn More</button>
-            </div>
-        </header>
+    <section id="home" class="page-section active hero-v5 py-40 text-center text-white">
+        <h1 class="text-6xl font-black uppercase italic mb-6">Elite <span class="text-blue-500">Service</span>.</h1>
+        <p class="max-w-xl mx-auto font-bold uppercase tracking-widest text-slate-300 text-xs mb-10">100% Free Nationwide Site Estimates.</p>
+        <button onclick="showPage('form')" class="btn-master px-12">Start Free Survey</button>
     </section>
 
-    <section id="form" class="page-section py-24 bg-slate-50">
-        <div class="max-w-4xl mx-auto px-8">
-            <div class="bg-white p-12 md:p-20 rounded-[60px] shadow-3xl border border-slate-100">
-                <form id="masterForm" class="space-y-10">
-                    <div class="border-b pb-8">
-                        <h3 class="text-3xl font-black uppercase italic mb-2">Project Authorization</h3>
-                        <p class="text-[10px] font-bold text-slate-400 uppercase italic">Detailed qualification for 100% Free estimates</p>
-                    </div>
-
-                    <div class="grid md:grid-cols-2 gap-8">
-                        <div>
-                            <label class="text-[10px] font-black uppercase text-slate-500 mb-3 block">Property Service Needed</label>
-                            <select id="vSvc" class="input-premium" required onchange="toggleExtraOptions()">
-                                <option value="">Select Service Type</option>
-                                <option value="Windows">Windows (National Replacement)</option>
-                                <option value="Roofing">Roofing (Complete System)</option>
-                                <option value="Solar">Solar Energy Matrix</option>
-                                <option value="HVAC">Heating & Air Efficiency</option>
-                                <option value="Siding">Siding & Exterior Wall</option>
-                                <option value="Kitchen">Luxury Kitchen Remodel</option>
-                                <option value="Bathroom">Premium Bathroom Spa</option>
-                            </select>
-                        </div>
-                        <div id="extraOptions" class="hidden">
-                            <label class="text-[10px] font-black uppercase text-slate-500 mb-3 block">Total Units/Windows</label>
-                            <input type="number" id="vUnits" class="input-premium" placeholder="e.g. 10">
-                        </div>
-                    </div>
-
-                    <div class="grid md:grid-cols-2 gap-8">
-                        <div>
-                            <label class="text-[10px] font-black uppercase text-slate-500 mb-3 block">Homeownership Verified?</label>
-                            <select id="vOwner" class="input-premium" required>
-                                <option value="Yes">Yes, Legal Owner</option>
-                                <option value="No">No, Tenant/Renter</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="text-[10px] font-black uppercase text-slate-500 mb-3 block">Ready for Installation?</label>
-                            <select id="vReady" class="input-premium" required>
-                                <option value="Emergency">Emergency / Immediate</option>
-                                <option value="Within 30 Days">Within 30 Days</option>
-                                <option value="1-3 Months">1-3 Months</option>
-                                <option value="Planning Only">Just Researching</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="grid md:grid-cols-2 gap-8">
-                        <div>
-                            <label class="text-[10px] font-black uppercase text-slate-500 mb-3 block">Estimated Credit Range</label>
-                            <select id="vCredit" class="input-premium" required>
-                                <option value="Excellent (720+)">Excellent (720+)</option>
-                                <option value="Good (660-719)">Good (660-719)</option>
-                                <option value="Fair (Below 660)">Fair (Below 660)</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="text-[10px] font-black uppercase text-slate-500 mb-3 block">Property Zip Code</label>
-                            <input type="text" id="vZip" class="input-premium" placeholder="e.g. 90210" required>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="text-[10px] font-black uppercase text-slate-500 mb-3 block">Full Physical Property Address</label>
-                        <input type="text" id="vAddr" class="input-premium" placeholder="Street, City, State" required>
-                    </div>
-
-                    <div class="grid md:grid-cols-2 gap-8">
-                        <div>
-                            <label class="text-[10px] font-black uppercase text-slate-500 mb-3 block">Full Legal Name</label>
-                            <input type="text" id="vName" class="input-premium" placeholder="John Doe" required>
-                        </div>
-                        <div>
-                            <label class="text-[10px] font-black uppercase text-slate-500 mb-3 block">Contact Phone Number</label>
-                            <input type="tel" id="vPhone" class="input-premium" placeholder="(555) 000-0000" required>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="text-[10px] font-black uppercase text-slate-500 mb-3 block">Official Email Address</label>
-                        <input type="email" id="vEmail" class="input-premium" placeholder="email@domain.com" required>
-                    </div>
-
-                    <div class="grid md:grid-cols-2 gap-8">
-                        <div>
-                            <label class="text-[10px] font-black uppercase text-slate-500 mb-3 block">Preferred Appointment Date</label>
-                            <input type="date" id="vDate" class="input-premium" required>
-                        </div>
-                        <div>
-                            <label class="text-[10px] font-black uppercase text-slate-500 mb-3 block">Preferred Time Slot (9 AM - 7 PM)</label>
-                            <select id="vTime" class="input-premium" required>
-                                <option value="09:00 AM">09:00 AM</option>
-                                <option value="11:00 AM">11:00 AM</option>
-                                <option value="01:00 PM">01:00 PM</option>
-                                <option value="03:00 PM">03:00 PM</option>
-                                <option value="05:00 PM">05:00 PM</option>
-                                <option value="07:00 PM">07:00 PM</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <p class="text-[9px] font-bold text-slate-400 uppercase italic">By clicking authorize, you agree to our privacy policy. Your data is protected by enterprise-grade encryption.</p>
-                    <button type="submit" class="btn-master w-full">Transmit Authorization Request</button>
-                </form>
-
-                <div id="vSuccess" class="hidden text-center py-12">
-                    <div class="w-24 h-24 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-10 text-4xl">✓</div>
-                    <h3 class="text-3xl font-black uppercase mb-6">Request Authorized</h3>
-                    <div id="vReceipt" class="bg-slate-900 text-white p-10 rounded-[40px] text-left text-[11px] font-bold uppercase space-y-4 border-l-8 border-blue-500"></div>
-                    <button onclick="location.reload()" class="mt-12 text-blue-600 font-black text-[10px] uppercase underline">New Project Authorization</button>
+    <section id="form" class="page-section py-20 px-6">
+        <div class="max-w-3xl mx-auto bg-white p-12 rounded-[50px] shadow-2xl border">
+            <form id="masterForm" class="space-y-6">
+                <h3 class="text-2xl font-black uppercase italic border-b pb-4">Project Details</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <select id="vSvc" class="input-premium" required onchange="checkWin()"><option value="">Service Type</option><option value="Windows">Windows</option><option value="Roofing">Roofing</option><option value="Solar">Solar</option></select>
+                    <input type="number" id="vWin" class="input-premium hidden" placeholder="How many windows?">
                 </div>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <select id="vOwner" class="input-premium" required><option value="Yes">Homeowner (Yes)</option><option value="No">No</option></select>
+                    <select id="vCredit" class="input-premium" required><option value="720+">720+ Credit</option><option value="660-719">660-719</option><option value="Below 660">Below 660</option></select>
+                </div>
+                <input type="text" id="vAddr" class="input-premium" placeholder="Full Address" required>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <input type="text" id="vZip" class="input-premium" placeholder="Zip Code" required>
+                    <input type="text" id="vName" class="input-premium" placeholder="Full Name" required>
+                </div>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <input type="tel" id="vPhone" class="input-premium" placeholder="Phone Number" required>
+                    <input type="email" id="vEmail" class="input-premium" placeholder="Email Address" required>
+                </div>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <input type="date" id="vDate" class="input-premium" required>
+                    <select id="vTime" class="input-premium" required><option value="09 AM - 12 PM">09 AM - 12 PM</option><option value="12 PM - 03 PM">12 PM - 03 PM</option><option value="03 PM - 07 PM">03 PM - 07 PM</option></select>
+                </div>
+                <button type="submit" class="btn-master w-full">Submit Authorization</button>
+            </form>
+            <div id="vSuccess" class="hidden text-center py-10">
+                <h2 class="text-3xl font-black text-blue-600 mb-4">SUBMITTED!</h2>
+                <p id="vTid" class="text-xs font-bold uppercase"></p>
+                <button onclick="location.reload()" class="mt-6 underline text-[10px] font-black">BACK</button>
             </div>
         </div>
     </section>
@@ -179,57 +87,44 @@
     <div id="chat-hub">
         <div id="chat-window">
             <div class="chat-header">
-                <div class="flex justify-between items-center">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-blue-600 rounded-2xl flex items-center justify-center text-xl">👤</div>
-                        <div>
-                            <h4 class="font-black text-[11px] uppercase tracking-tighter">Corporate Dispatch</h4>
-                            <p class="text-[8px] text-blue-400 font-black uppercase">Agent-786 Monitoring</p>
-                        </div>
-                    </div>
-                    <button onclick="toggleChat()" class="text-white opacity-50">✕</button>
-                </div>
+                <div class="flex items-center gap-3"><div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">👤</div><div><p class="text-[10px] font-black uppercase">Live Support</p><p class="text-[8px] text-blue-400 font-bold">Agent-786</p></div></div>
+                <button onclick="toggleChat()">✕</button>
             </div>
-            <div id="chat-feed">
-                <div class="bubble bubble-admin">Welcome to U.S. Home Improvement. I am your automated assistant. How can we serve your property today?</div>
-                <div id="bot-options" class="flex flex-col gap-2">
-                    <button class="chat-bot-option" onclick="botHelp('pricing')">Estimate Pricing Info</button>
-                    <button class="chat-bot-option" onclick="botHelp('areas')">Check Service Areas</button>
-                    <button class="chat-bot-option" onclick="requestLiveAgent()" style="border-color: #ef4444; color: #ef4444;">🚨 Connect to Live Agent</button>
-                </div>
+            <div id="chat-feed"></div>
+            <div id="bot-panel" class="p-4 bg-slate-50 border-t flex flex-col gap-2">
+                <div class="bot-opt" onclick="botResp('pricing')">Free Estimate Pricing?</div>
+                <div class="bot-opt" onclick="botResp('areas')">Serviceable Areas?</div>
+                <div class="bot-opt" onclick="requestLive()" style="border-color:#ef4444; color:#ef4444;">🚨 Talk to Live Agent</div>
             </div>
-            <div class="p-5 border-t bg-white flex gap-3">
-                <input type="text" id="chat-input" placeholder="Type detailed inquiry..." class="w-full text-xs font-semibold outline-none">
+            <div class="p-4 border-t flex gap-2">
+                <input type="text" id="chat-input" placeholder="Type..." class="w-full text-xs outline-none">
                 <button onclick="sendMsg()" class="text-blue-600 font-black text-xs uppercase">Send</button>
             </div>
         </div>
-        <button onclick="toggleChat()" class="fixed bottom-8 right-8 w-20 h-20 bg-slate-900 rounded-full shadow-3xl flex items-center justify-center text-3xl z-[8500] hover:scale-110 transition">💬</button>
+        <button onclick="toggleChat()" class="fixed bottom-8 right-8 w-16 h-16 bg-slate-900 rounded-full text-white shadow-2xl z-[8500]">💬</button>
     </div>
 
     <div id="adminHub" class="fixed inset-0 bg-white z-[9999] hidden overflow-y-auto p-12">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex justify-between items-center border-b pb-10 mb-12">
-                <h3 class="text-4xl font-black italic uppercase tracking-tighter">Enterprise <span class="text-blue-600">Dispatch Hub</span></h3>
-                <div class="flex gap-4">
-                    <button onclick="exportData()" class="bg-emerald-50 text-emerald-600 px-8 py-3 rounded-full font-black text-[10px] uppercase">Export Leads</button>
-                    <button onclick="closeAdmin()" class="bg-red-50 text-red-500 px-8 py-3 rounded-full font-black text-[10px] uppercase">Exit Terminal</button>
-                </div>
+        <div class="max-w-6xl mx-auto">
+            <div class="flex justify-between items-center border-b pb-6 mb-10">
+                <h3 class="text-3xl font-black italic">DISPATCH HUB</h3>
+                <button onclick="closeAdmin()" class="bg-red-500 text-white px-6 py-2 rounded-xl text-[10px] font-bold">EXIT</button>
             </div>
-            <div id="authBox" class="text-center py-24">
-                <input type="password" id="pin" class="input-premium max-w-[320px] text-center text-4xl mb-8" placeholder="••••">
-                <br><button onclick="unlock()" class="btn-master max-w-[320px]">Authorize Access</button>
+            <div id="authBox" class="text-center py-20">
+                <input type="password" id="pin" class="input-premium max-w-xs text-center text-2xl mb-6" placeholder="PIN">
+                <br><button onclick="unlock()" class="btn-master max-w-xs">LOGIN</button>
             </div>
-            <div id="hubData" class="hidden grid lg:grid-cols-2 gap-16">
+            <div id="hubData" class="hidden grid lg:grid-cols-2 gap-10">
                 <div id="adminLeads"></div>
                 <div>
-                    <h4 class="font-black uppercase mb-10 text-slate-400 tracking-[0.2em]">Live Signals</h4>
+                    <h4 class="font-black uppercase mb-6 text-blue-600">Live Chats</h4>
                     <div id="adminChats" class="space-y-4"></div>
-                    <div id="replyInterface" class="hidden mt-12 p-10 bg-slate-900 rounded-[50px] border-4 border-blue-500 shadow-2xl">
-                        <p class="text-[10px] font-black text-blue-400 mb-6 uppercase">Target ID: <span id="targetUser" class="text-white"></span></p>
-                        <input type="text" id="adminReplyText" class="input-premium mb-6 bg-slate-800 border-slate-700 text-white" placeholder="Type official response...">
+                    <div id="adminReplyArea" class="hidden mt-8 p-8 bg-slate-900 rounded-[30px] text-white">
+                        <p class="text-[10px] font-black text-blue-400 mb-4">REPLYING TO: <span id="targetUser"></span></p>
+                        <input type="text" id="replyText" class="input-premium bg-slate-800 border-slate-700 text-white mb-4" placeholder="Message...">
                         <div class="flex gap-4">
-                            <button onclick="sendAdminReply()" class="btn-master flex-1 text-xs">Send Response</button>
-                            <button onclick="clearCurrentChat()" class="bg-red-500 text-white px-8 rounded-3xl font-black text-[10px] uppercase">Clear Chat History</button>
+                            <button onclick="sendReply()" class="btn-master flex-1 text-xs">Send</button>
+                            <button onclick="clearChat()" class="bg-red-600 px-6 rounded-xl font-bold text-[10px]">CLEAR</button>
                         </div>
                     </div>
                 </div>
@@ -238,100 +133,73 @@
     </div>
 
     <script>
-        // FIREBASE ARCHITECTURE
         const firebaseConfig = { apiKey: "AIzaSyAoQYMhsYLeRaLTkM03T0mOpOK8iXJPatA", authDomain: "ushomes07.firebaseapp.com", databaseURL: "https://ushomes07-default-rtdb.firebaseio.com", projectId: "ushomes07", storageBucket: "ushomes07.firebasestorage.app", messagingSenderId: "24299478735", appId: "1:24299478735:web:5ec1ac023ef15e186521ba" };
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
-        const userId = "CID-" + Math.floor(1000 + Math.random() * 9000);
+        const cid = "USER-" + Math.floor(1000 + Math.random() * 9000);
 
-        // NAVIGATION ENGINE
-        function showPage(id) { document.querySelectorAll('.page-section').forEach(p=>p.classList.remove('active')); document.getElementById(id).classList.add('active'); window.scrollTo({top:0, behavior:'smooth'}); }
-        function toggleChat() { const win = document.getElementById('chat-window'); win.style.display = (win.style.display === 'flex') ? 'none' : 'flex'; }
-        function toggleExtraOptions() { document.getElementById('extraOptions').classList.toggle('hidden', document.getElementById('vSvc').value !== 'Windows'); }
+        function showPage(id) { document.querySelectorAll('.page-section').forEach(p=>p.classList.remove('active')); document.getElementById(id).classList.add('active'); }
+        function toggleChat() { const w = document.getElementById('chat-window'); w.style.display = w.style.display === 'flex' ? 'none' : 'flex'; }
+        function checkWin() { document.getElementById('vWin').classList.toggle('hidden', document.getElementById('vSvc').value !== 'Windows'); }
 
-        // HYBRID CHAT LOGIC
-        function botHelp(type) {
-            const f = document.getElementById('chat-feed');
-            let resp = type === 'pricing' ? "All site inspections and estimates are 100% Free at no cost to the owner." : "We operate nationwide across all 50 states through authorized partners.";
-            f.innerHTML += `<div class="bubble bubble-user">${type} Info Request</div>`;
-            setTimeout(() => { f.innerHTML += `<div class="bubble bubble-admin">${resp}</div>`; f.scrollTop = f.scrollHeight; }, 600);
+        // CHAT LOGIC
+        const feed = document.getElementById('chat-feed');
+        window.onload = () => { feed.innerHTML += `<div class="bubble bubble-admin">Welcome! How can we assist you with your free quote today?</div>`; };
+
+        function botResp(t) {
+            let m = t === 'pricing' ? "Our estimates are 100% Free - no obligation." : "We serve all 50 US States.";
+            feed.innerHTML += `<div class="bubble bubble-user">${t} info</div>`;
+            setTimeout(() => { feed.innerHTML += `<div class="bubble bubble-admin">${m}</div>`; feed.scrollTop = feed.scrollHeight; }, 500);
         }
 
-        function requestLiveAgent() {
-            db.ref('chats/' + userId).push({ text: "🚨 URGENT: USER REQUESTED LIVE AGENT", type: 'user' });
-            document.getElementById('bot-options').classList.add('hidden');
-            document.getElementById('chat-feed').innerHTML += `<div class="bubble bubble-admin" style="background:#fffbeb; border:1px solid #fde68a;">Connecting to Dispatch Senior Agent-786... Please stand by.</div>`;
+        function requestLive() {
+            db.ref('chats/' + cid).push({ text: "🚨 LIVE AGENT REQUESTED", type: 'user' });
+            document.getElementById('bot-panel').classList.add('hidden');
+            feed.innerHTML += `<div class="bubble bubble-admin" style="background:#fffbeb">Connecting to Agent-786...</div>`;
         }
 
         function sendMsg() {
             const t = document.getElementById('chat-input').value; if(!t) return;
-            db.ref('chats/' + userId).push({ text: t, type: 'user' });
+            db.ref('chats/' + cid).push({ text: t, type: 'user' });
             document.getElementById('chat-input').value = '';
         }
 
-        db.ref('chats/' + userId).on('value', snap => {
-            const msgs = snap.val(); let h = '';
-            for(let k in msgs) h += `<div class="bubble ${msgs[k].type === 'user' ? 'bubble-user' : 'bubble-admin'}">${msgs[k].text}</div>`;
-            document.getElementById('chat-feed').innerHTML = h;
-            document.getElementById('chat-feed').scrollTop = document.getElementById('chat-feed').scrollHeight;
+        // Real-time Chat Sync
+        db.ref('chats/' + cid).on('value', s => {
+            let h = `<div class="bubble bubble-admin">Welcome! How can we assist you with your free quote today?</div>`;
+            s.forEach(m => { const v = m.val(); h += `<div class="bubble ${v.type==='user'?'bubble-user':'bubble-admin'}">${v.text}</div>`; });
+            feed.innerHTML = h; feed.scrollTop = feed.scrollHeight;
         });
 
-        // SURVEY TRANSIT
-        document.getElementById('masterForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const tid = "US-HUB-" + Math.floor(100000 + Math.random() * 900000);
-            const data = { 
-                tid, name: document.getElementById('vName').value, email: document.getElementById('vEmail').value,
-                phone: document.getElementById('vPhone').value, addr: document.getElementById('vAddr').value, 
-                zip: document.getElementById('vZip').value, svc: document.getElementById('vSvc').value,
-                owner: document.getElementById('vOwner').value, ready: document.getElementById('vReady').value,
-                credit: document.getElementById('vCredit').value, appt: document.getElementById('vDate').value + " @ " + document.getElementById('vTime').value,
-                units: document.getElementById('vUnits').value || "N/A", ts: new Date().toLocaleString()
-            };
-            db.ref('leads').push(data).then(() => {
-                document.getElementById('masterForm').classList.add('hidden');
-                document.getElementById('vSuccess').classList.remove('hidden');
-                document.getElementById('vReceipt').innerHTML = `
-                    <p>TRACKING ID: <span class="text-blue-400">${tid}</span></p>
-                    <p>CUSTOMER: ${data.name}</p>
-                    <p>SERVICE: ${data.svc} (${data.units} Units)</p>
-                    <p>PROPERTY: ${data.addr}, ${data.zip}</p>
-                    <p>CREDIT RATING: ${data.credit}</p>
-                    <p>APPOINTMENT: ${data.appt}</p>
-                `;
-            });
-        });
+        // FORM
+        document.getElementById('masterForm').onsubmit = (e) => {
+            e.preventDefault(); const tid = "US-" + Math.floor(100000 + Math.random() * 900000);
+            const d = { tid, name: document.getElementById('vName').value, phone: document.getElementById('vPhone').value, addr: document.getElementById('vAddr').value, svc: document.getElementById('vSvc').value, credit: document.getElementById('vCredit').value, appt: document.getElementById('vDate').value + " " + document.getElementById('vTime').value };
+            db.ref('leads').push(d).then(() => { document.getElementById('masterForm').classList.add('hidden'); document.getElementById('vSuccess').classList.remove('hidden'); document.getElementById('vTid').innerText = "TRACKING ID: " + tid; });
+        };
 
-        // ADMIN TERMINAL ENGINE
-        let taps = 0;
-        let activeAdminChat = '';
-        function handleAdminTap() { taps++; if(taps>=5){ document.getElementById('adminHub').classList.remove('hidden'); taps=0; } }
-        function closeAdmin() { document.getElementById('adminHub').classList.add('hidden'); }
+        // ADMIN
+        let activeChat = '';
+        function handleAdminTap() { if(!window.taps) window.taps=0; window.taps++; if(window.taps>=5) document.getElementById('adminHub').classList.remove('hidden'); }
+        function closeAdmin() { document.getElementById('adminHub').classList.add('hidden'); window.taps=0; }
         function unlock() { if(document.getElementById('pin').value === "786") { document.getElementById('authBox').classList.add('hidden'); document.getElementById('hubData').classList.remove('hidden'); syncAdmin(); } }
 
         function syncAdmin() {
             db.ref('leads').on('value', s => {
-                let h = '<h4 class="font-black uppercase mb-10 text-slate-400 tracking-[0.2em]">Authorized Leads</h4>';
-                s.forEach(l => { const v = l.val(); h += `<div class="p-8 bg-slate-50 border-2 rounded-[40px] mb-6 relative hover:border-blue-500 transition shadow-sm"><span class="absolute top-6 right-8 bg-slate-900 text-white text-[8px] font-black px-3 py-1 rounded-full">${v.tid}</span><h5 class="text-xl font-black italic uppercase">${v.name}</h5><p class="text-[10px] font-bold text-blue-600 mt-2">📍 ${v.addr} | 📞 ${v.phone}</p><p class="text-[9px] font-bold text-slate-400 mt-3 uppercase">${v.svc} | ${v.ready} | Credit: ${v.credit}</p><p class="text-[10px] font-black text-emerald-600 mt-2 uppercase italic underline">Appt: ${v.appt}</p></div>`; });
+                let h = '<h4 class="font-black uppercase mb-6">Leads</h4>';
+                s.forEach(l => { const v = l.val(); h += `<div class="p-6 bg-slate-50 rounded-2xl mb-4 border"><p class="text-[10px] font-black">${v.tid}</p><h5 class="font-black">${v.name}</h5><p class="text-[9px] uppercase">${v.svc} | ${v.phone} | ${v.addr}</p><p class="text-[9px] text-blue-600 font-bold uppercase">${v.appt}</p></div>`; });
                 document.getElementById('adminLeads').innerHTML = h;
             });
             db.ref('chats').on('value', s => {
                 let h = '';
-                s.forEach(c => { 
-                    const uid = c.key; const last = Object.values(c.val()).pop();
-                    h += `<div onclick="openAdminReply('${uid}')" class="p-6 bg-white border-2 rounded-3xl mb-4 cursor-pointer hover:border-blue-600 shadow-sm"><p class="text-[10px] font-black text-blue-600 mb-2 uppercase tracking-tighter">${uid}</p><p class="text-[11px] font-bold italic truncate">"${last.text}"</p></div>`;
-                });
-                document.getElementById('adminChats').innerHTML = h || '<p class="text-[10px] font-black uppercase text-slate-300">No Active Signals.</p>';
+                s.forEach(c => { const uid = c.key; const last = Object.values(c.val()).pop(); h += `<div onclick="openReply('${uid}')" class="p-4 bg-white border-2 rounded-xl cursor-pointer hover:border-blue-500"><p class="text-[8px] font-black">${uid}</p><p class="text-[11px] font-bold truncate">"${last.text}"</p></div>`; });
+                document.getElementById('adminChats').innerHTML = h;
             });
         }
 
-        function openAdminReply(uid) { activeAdminChat = uid; document.getElementById('replyInterface').classList.remove('hidden'); document.getElementById('targetUser').innerText = uid; }
-        function sendAdminReply() {
-            const t = document.getElementById('adminReplyText').value; if(!t) return;
-            db.ref('chats/' + activeAdminChat).push({ text: t, type: 'admin' });
-            document.getElementById('adminReplyText').value = '';
-        }
-        function clearCurrentChat() { if(confirm('Erase entire history for this user?')) { db.ref('chats/' + activeAdminChat).remove(); document.getElementById('replyInterface').classList.add('hidden'); } }
+        function openReply(u) { activeChat = u; document.getElementById('adminReplyArea').classList.remove('hidden'); document.getElementById('targetUser').innerText = u; }
+        function sendReply() { const t = document.getElementById('replyText').value; if(!t) return; db.ref('chats/' + activeChat).push({ text: t, type: 'admin' }); document.getElementById('replyText').value = ''; }
+        function clearChat() { if(confirm('Delete?')) { db.ref('chats/' + activeChat).remove(); document.getElementById('adminReplyArea').classList.add('hidden'); } }
     </script>
 </body>
 </html>
