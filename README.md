@@ -116,8 +116,8 @@
             <div class="matrix-card"><img src="./WA_1776549622236.jpeg"><h4>Doors</h4></div>
             <div class="matrix-card"><img src="./WA_1776549862258.jpeg"><h4>Kitchen</h4></div>
             <div class="matrix-card"><img src="./WA_1776549917709.jpeg"><h4>Bathroom</h4></div>
-            <div class="matrix-card"><img src="./WA_1776550133465.jpeg"><h4>Garage</h4></div>
-            <div class="matrix-card"><img src="./WA_1776549990291.jpeg"><h4>Deck</h4></div>
+            <div class="matrix-card"><img src="./WA_1776550066723.jpeg"><h4>Garage</h4></div>
+            <div class="matrix-card"><img src="./WA_1776549990293.jpeg"><h4>Deck</h4></div>
         </div>
     </section>
 
