@@ -2,14 +2,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>U.S. HOME IMPROVEMENT | National Matrix</title>
+    <title>U.S. HOME IMPROVEMENT | National Authorized Network</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 
     <style>
-        :root { --primary: #1e3a8a; --accent: #2563eb; }
+        :root { --primary: #1e3a8a; --accent: #2563eb; --success: #059669; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f8fafc; color: #0f172a; }
         .hero-gradient { background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%); position: relative; }
         .hero-gradient::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 8px; background: var(--accent); }
@@ -25,8 +25,10 @@
 
         .grid-matrix { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; padding: 20px; }
         .matrix-card { background: white; border-radius: 20px; overflow: hidden; border: 1px solid #f1f5f9; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); text-align: center; }
-        .matrix-card img { width: 100%; height: 130px; object-fit: cover; background: #e2e8f0; }
+        .matrix-card img { width: 100%; height: 130px; object-fit: cover; }
         .matrix-card h4 { font-size: 11px; font-weight: 800; color: var(--primary); text-transform: uppercase; padding: 12px 0; }
+        
+        .trust-badge { display: flex; align-items: center; gap: 8px; background: #ecfdf5; color: #065f46; padding: 6px 12px; border-radius: 50px; font-size: 9px; font-weight: 800; }
     </style>
 </head>
 <body>
@@ -36,15 +38,15 @@
             <img src="./WA_1776550450872.jpeg" class="h-10 w-10 rounded-full border shadow-sm">
             <div>
                 <span onclick="toggleAdmin()" class="block font-black text-xs uppercase tracking-tighter cursor-pointer">U.S. Home Improvement</span>
-                <span class="block text-[8px] font-bold text-green-600 uppercase">● National Licensed Network</span>
+                <div class="trust-badge uppercase">● California Licensed #786-092</div>
             </div>
         </div>
-        <div class="hidden md:block text-[10px] font-black text-slate-400 uppercase tracking-widest">Enterprise Hub</div>
+        <div class="hidden md:block text-[10px] font-black text-slate-400 uppercase tracking-widest">National Headquarters</div>
     </nav>
 
     <header class="hero-gradient py-12 px-6 text-center text-white">
-        <h1 class="text-3xl font-black uppercase italic tracking-tighter mb-2">Qualified Matrix</h1>
-        <p class="text-[10px] font-bold uppercase tracking-[0.4em] text-blue-200">Nationwide Authorized Network</p>
+        <h1 class="text-3xl font-black uppercase italic tracking-tighter mb-2">Qualified Upgrade Matrix</h1>
+        <p class="text-[10px] font-bold uppercase tracking-[0.4em] text-blue-200">Official Contractor Hub • Nationwide 2026</p>
     </header>
 
     <main class="max-w-md mx-auto px-4 -mt-8 mb-20 relative z-10">
@@ -73,7 +75,7 @@
                 </div>
 
                 <div class="step-form" id="step2">
-                    <label class="text-[10px] font-black text-slate-400 uppercase block mb-3">02. Qualification</label>
+                    <label class="text-[10px] font-black text-slate-400 uppercase block mb-3">02. Qualification Matrix</label>
                     <div id="subQuestions"></div>
                     <select id="creditScore" class="input-pro mb-4" required>
                         <option value="">Estimated Credit Score?</option>
@@ -82,11 +84,11 @@
                         <option value="Fair">600-659 (Fair)</option>
                         <option value="Needs Work">Below 600</option>
                     </select>
-                    <button type="button" onclick="goStep('step3')" class="btn-action">Next Step</button>
+                    <button type="button" onclick="goStep('step3')" class="btn-action">Authorize Appointment</button>
                 </div>
 
                 <div class="step-form" id="step3">
-                    <label class="text-[10px] font-black text-slate-400 uppercase block mb-3">03. Finalize</label>
+                    <label class="text-[10px] font-black text-slate-400 uppercase block mb-3">03. Verification</label>
                     <input type="text" id="custAddress" placeholder="Street Address" class="input-pro mb-3" required>
                     <div class="flex gap-2">
                         <input type="text" id="custZip" placeholder="Zip" class="input-pro mb-3" required>
@@ -101,14 +103,14 @@
                             <option value="Afternoon">Afternoon</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn-action">Authorize Appointment</button>
+                    <button type="submit" class="btn-action">Confirm & Submit</button>
                 </div>
             </form>
         </div>
     </main>
 
     <section class="max-w-4xl mx-auto px-6 mb-20 text-center">
-        <h2 class="font-black uppercase text-xs tracking-widest text-slate-400 mb-10 italic">Core Improvements Matrix</h2>
+        <h2 class="font-black uppercase text-[10px] tracking-widest text-slate-400 mb-10 italic">Premium Portfolio</h2>
         <div class="grid-matrix">
             <div class="matrix-card"><img src="./WA_1776549716792.jpeg"><h4>Roofing</h4></div>
             <div class="matrix-card"><img src="./WA_1776549781247.jpeg"><h4>Solar Panels</h4></div>
@@ -122,16 +124,27 @@
     </section>
 
     <footer class="bg-slate-900 py-16 px-8 text-white">
-        <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-12 text-[10px] font-bold uppercase text-slate-400">
+        <div class="max-w-4xl mx-auto grid md:grid-cols-3 gap-12 text-[10px] font-bold uppercase text-slate-400">
             <div>
-                <h4 class="text-blue-400 mb-4">National Authorization</h4>
-                <p class="mb-2">Licensed nationwide across all states. All contractors are verified for quality and compliance.</p>
-                <p class="text-blue-200 lowercase">ushomeimprovement07@gmail.com</p>
+                <h4 class="text-blue-400 mb-4">Headquarters</h4>
+                <p class="leading-relaxed">
+                    702 Main Street<br>
+                    Woodland, California 95695<br>
+                    United States
+                </p>
             </div>
-            <div class="flex flex-col gap-2">
-                <span onclick="alert('Privacy Secured')" class="cursor-pointer">Privacy Policy</span>
-                <span onclick="alert('Terms Verified')" class="cursor-pointer">Terms of Service</span>
-                <span class="text-slate-600 mt-4 tracking-widest">EST. 2026 MATRIX HUB</span>
+            <div>
+                <h4 class="text-blue-400 mb-4">Authorized Support</h4>
+                <p class="lowercase mb-2">ushomeimprovement07@gmail.com</p>
+                <p>National Service Network</p>
+            </div>
+            <div>
+                <h4 class="text-blue-400 mb-4">Policy Hub</h4>
+                <div class="flex flex-col gap-2">
+                    <span onclick="alert('Secured')" class="cursor-pointer">Privacy Policy</span>
+                    <span onclick="alert('Verified')" class="cursor-pointer">Terms of Service</span>
+                    <span class="text-slate-700 mt-2">© 2026 MATRIX HUB</span>
+                </div>
             </div>
         </div>
     </footer>
@@ -171,9 +184,9 @@
                 h = `<select id="sq1" class="input-pro mb-4"><option value="">How many windows?</option><option value="3-5">3-5</option><option value="6-10">6-10</option><option value="11+">11+</option></select>
                      <select id="sq2" class="input-pro mb-4"><option value="">Type of windows?</option><option value="Vinyl">Vinyl</option><option value="Wood">Wood</option></select>`;
             } else if(s === 'Roofing') {
-                h = `<select id="sq1" class="input-pro mb-4"><option value="">Current roof type?</option><option value="Shingles">Shingles</option><option value="Metal">Metal</option></select>`;
+                h = `<select id="sq1" class="input-pro mb-4"><option value="">Current roof type?</option><option value="Shingles">Shingles</option><option value="Metal">Metal</option><option value="Tile">Tile</option></select>`;
             } else {
-                h = `<p class="text-[10px] uppercase font-bold text-blue-600 mb-4">Qualifying details requested on call.</p>`;
+                h = `<p class="text-[10px] uppercase font-bold text-blue-600 mb-4 italic">Standard nationwide qualifying applied.</p>`;
             }
             c.innerHTML = h;
         }
@@ -196,17 +209,11 @@
                 appTime: document.getElementById('appTime').value,
                 timestamp: new Date().toLocaleString()
             };
-            db.ref('leads').push(data).then(() => { alert("Authorized! Our agent will contact you soon."); location.reload(); });
+            db.ref('leads').push(data).then(() => { alert("Authorized! Our Woodland CA team will call you soon."); location.reload(); });
         });
 
         function toggleAdmin() { document.getElementById('adminPanel').classList.toggle('hidden'); }
-        function unlock() {
-            if(document.getElementById('pin').value === "786") {
-                document.getElementById('authPanel').classList.add('hidden');
-                document.getElementById('leadsList').classList.remove('hidden');
-                sync();
-            }
-        }
+        function unlock() { if(document.getElementById('pin').value === "786") { document.getElementById('authPanel').classList.add('hidden'); document.getElementById('leadsList').classList.remove('hidden'); sync(); } }
         function sync() {
             db.ref('leads').on('value', snap => {
                 const data = snap.val(); let h = '';
