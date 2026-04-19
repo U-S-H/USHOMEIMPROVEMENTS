@@ -23,11 +23,11 @@
         .page-section.active { display: block; animation: contentFade 0.7s ease-out; }
         @keyframes contentFade { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         .step-pill { width: 100%; height: 6px; background: #e2e8f0; border-radius: 10px; position: relative; overflow: hidden; }
-        .step-fill { height: 100%; background: var(--accent); width: 0%; transition: 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+        .step-fill { height: 100%; background: var(--accent); width: 0%; transition: 0.6s; }
         #chat-window { position: fixed; bottom: 100px; right: 30px; width: 360px; height: 550px; background: white; border-radius: 30px; box-shadow: 0 30px 60px -12px rgba(0,0,0,0.25); display: none; flex-direction: column; z-index: 6000; overflow: hidden; border: 1px solid #f1f5f9; }
         .chat-header { background: #0f172a; padding: 22px; color: white; display: flex; align-items: center; gap: 12px; }
         #chat-feed { flex: 1; padding: 20px; overflow-y: auto; background: #f8fafc; display: flex; flex-direction: column; gap: 12px; }
-        .bubble { padding: 12px 18px; border-radius: 20px; font-size: 13px; max-width: 85%; font-weight: 500; line-height: 1.5; }
+        .bubble { padding: 12px 18px; border-radius: 20px; font-size: 13px; max-width: 85%; font-weight: 500; }
         .bubble-user { background: #2563eb; color: white; align-self: flex-end; border-bottom-right-radius: 5px; }
         .bubble-admin { background: white; color: #1e293b; align-self: flex-start; border-bottom-left-radius: 5px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
     </style>
@@ -43,7 +43,7 @@
             </div>
         </div>
         <div class="flex items-center gap-6">
-            <button onclick="toggleLang()" id="langBtn" class="text-[10px] font-black border-2 border-blue-600 px-4 py-1 rounded-full text-blue-600 hover:bg-blue-600 hover:text-white transition uppercase">ESP</button>
+            <button onclick="toggleLang()" id="langBtn" class="text-[10px] font-black border-2 border-blue-600 px-4 py-1 rounded-full text-blue-600 hover:bg-blue-600 hover:text-white transition">ESP</button>
             <div class="hidden lg:flex gap-10 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
                 <button onclick="showPage('home')" class="hover:text-blue-600">Home</button>
                 <button onclick="showPage('faq')" class="hover:text-blue-600">FAQ</button>
@@ -58,9 +58,7 @@
             <div><p class="agent-id">Agent Connection: Verified</p><h4 class="font-black uppercase text-[11px]">Senior Dispatch Support</h4></div>
             <button onclick="toggleChat()" class="ml-auto text-xl">✕</button>
         </div>
-        <div id="chat-feed">
-            <div class="bubble bubble-admin">Welcome to U.S. Home Improvement. How may I assist you with your property survey?</div>
-        </div>
+        <div id="chat-feed"></div>
         <div class="p-5 border-t bg-white flex gap-3">
             <input type="text" id="chat-input" placeholder="Type your question..." class="w-full text-xs font-semibold outline-none">
             <button onclick="sendMsg()" class="text-blue-600 font-black text-xs uppercase">Send</button>
@@ -83,7 +81,7 @@
                 <div class="step-pill"><div id="pBar" class="step-fill" style="width: 0%;"></div></div>
             </div>
 
-            <div class="bg-white p-12 rounded-[48px] shadow-2xl border border-slate-50 relative">
+            <div class="bg-white p-12 rounded-[48px] shadow-2xl border border-slate-50">
                 <form id="v3Form">
                     <h3 id="formHeader" class="text-2xl font-black uppercase italic text-slate-900 mb-10">Site Authorization Terminal</h3>
                     <div class="grid md:grid-cols-2 gap-6 mb-6">
@@ -95,7 +93,7 @@
                         <input type="text" id="vZip" placeholder="Zip Code (5 Digits)" class="input-pro" maxlength="5" required>
                     </div>
                     <div class="mb-6">
-                        <label class="text-[10px] font-black uppercase text-blue-600 mb-2 block">Upload Site Photos (Optional)</label>
+                        <label class="text-[10px] font-black uppercase text-blue-600 mb-2 block italic">Upload Site Photos (Optional)</label>
                         <input type="file" id="vFile" class="input-pro" accept="image/*">
                     </div>
                     <div class="grid md:grid-cols-2 gap-6 mb-6">
@@ -105,13 +103,12 @@
                             <option value="Windows">Windows Replacement</option>
                             <option value="Roofing">Roofing Installation</option>
                             <option value="Solar">Solar Power Matrix</option>
-                            <option value="Kitchen">Interior Remodeling</option>
                         </select>
                         <select id="vCredit" class="input-pro" required>
-                            <option value="">Estimated Credit Score</option>
+                            <option value="">Credit Score</option>
                             <option value="720+">Excellent (720+)</option>
                             <option value="660-719">Good (660-719)</option>
-                            <option value="Below 660">Building (Below 660)</option>
+                            <option value="Below 660">Fair (Below 660)</option>
                         </select>
                     </div>
                     <input type="text" id="vAddr" placeholder="Physical Site Address" class="input-pro mb-10" required>
@@ -129,7 +126,6 @@
     </section>
 
     <script>
-        // Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyAoQYMhsYLeRaLTkM03T0mOpOK8iXJPatA",
             authDomain: "ushomes07.firebaseapp.com",
@@ -144,11 +140,10 @@
         const storage = firebase.storage();
         const userId = "SIG-" + Math.floor(100000 + Math.random() * 899999);
 
-        // Language Toggle
         let currentLang = 'EN';
         const content = {
-            EN: { subtitle: "Enterprise National Authority", header: "Site Authorization Terminal", btn: "Authorize & Transmit", zipErr: "Please enter a valid 5-digit Zip." },
-            ES: { subtitle: "Autoridad Nacional de Empresas", header: "Terminal de Autorización de Sitio", btn: "Autorizar y Transmitir", zipErr: "Ingrese un código postal de 5 dígitos." }
+            EN: { subtitle: "Enterprise National Authority", header: "Site Authorization Terminal", btn: "Authorize & Transmit" },
+            ES: { subtitle: "Autoridad Nacional de Empresas", header: "Terminal de Autorización de Sitio", btn: "Autorizar y Transmitir" }
         };
 
         function toggleLang() {
@@ -159,28 +154,17 @@
             document.getElementById('submitBtn').innerText = content[currentLang].btn;
         }
 
-        // UI Logic
         function showPage(id) { 
             document.querySelectorAll('.page-section').forEach(p=>p.classList.remove('active')); 
             document.getElementById(id).classList.add('active'); 
             window.scrollTo({top:0, behavior:'smooth'}); 
         }
+
         function toggleChat() { 
             const win = document.getElementById('chat-window'); 
             win.style.display = (win.style.display === 'flex') ? 'none' : 'flex'; 
         }
 
-        // Progress Bar
-        document.querySelectorAll('.input-pro').forEach(inp => {
-            inp.addEventListener('input', () => {
-                const filled = Array.from(document.querySelectorAll('#v3Form .input-pro')).filter(i => i.value).length;
-                const p = Math.floor((filled / 8) * 100);
-                document.getElementById('pBar').style.width = p + "%";
-                document.getElementById('pcent').innerText = p + "%";
-            });
-        });
-
-        // Smart Chatbot
         function sendMsg() {
             const input = document.getElementById('chat-input');
             const txt = input.value; if(!txt) return;
@@ -188,9 +172,9 @@
             input.value = '';
 
             const lowTxt = txt.toLowerCase();
-            let reply = "I'm connecting you to a senior agent. One moment.";
-            if(lowTxt.includes("cost") || lowTxt.includes("price")) reply = "Site surveys are 100% free of charge. Your local contractor will provide a detailed quote after inspection.";
-            if(lowTxt.includes("time") || lowTxt.includes("when")) reply = "Dispatches are usually finalized within 24-48 hours.";
+            let reply = "Agent-786 is reviewing your request.";
+            if(lowTxt.includes("price") || lowTxt.includes("cost")) reply = "Site assessments are free. Quotes depend on your local contractor's review.";
+            if(lowTxt.includes("time")) reply = "Dispatch confirmation usually takes 24 hours.";
 
             setTimeout(() => {
                 db.ref('chats/' + userId).push({ text: reply, type: 'admin' });
@@ -204,29 +188,28 @@
             document.getElementById('chat-feed').scrollTop = document.getElementById('chat-feed').scrollHeight;
         });
 
-        // Submission with Image Upload
         document.getElementById('v3Form').addEventListener('submit', async (e) => {
             e.preventDefault();
             const zip = document.getElementById('vZip').value;
-            if(!/^\d{5}$/.test(zip)) return alert(content[currentLang].zipErr);
+            if(!/^\d{5}$/.test(zip)) return alert("Invalid US Zip Code.");
 
             const btn = document.getElementById('submitBtn');
             btn.innerText = "Transmitting...";
             btn.disabled = true;
 
-            let imgUrl = "No Photo";
+            let photoUrl = "No Photo";
             const file = document.getElementById('vFile').files[0];
             if(file) {
-                const ref = storage.ref('inspections/' + Date.now() + "_" + file.name);
+                const ref = storage.ref('uploads/' + Date.now() + "_" + file.name);
                 await ref.put(file);
-                imgUrl = await ref.getDownloadURL();
+                photoUrl = await ref.getDownloadURL();
             }
 
             const tid = "US-DISPATCH-" + Math.floor(100000 + Math.random() * 900000);
             const data = {
                 tid, name: document.getElementById('vName').value, email: document.getElementById('vEmail').value,
                 phone: document.getElementById('vPhone').value, zip, svc: document.getElementById('vSvc').value,
-                addr: document.getElementById('vAddr').value, photo: imgUrl, ts: new Date().toLocaleString()
+                addr: document.getElementById('vAddr').value, photo: photoUrl, ts: new Date().toLocaleString()
             };
 
             db.ref('leads').push(data).then(() => {
@@ -236,9 +219,8 @@
             });
         });
 
-        // Admin Secret
         let taps = 0, tapT;
-        function handleAdminTap() { taps++; if(taps>=5) alert("Terminal Access: Use PIN 786 in Admin Hub"); clearTimeout(tapT); tapT=setTimeout(()=>taps=0,2000); }
+        function handleAdminTap() { taps++; if(taps>=5) alert("Terminal Pin: 786"); clearTimeout(tapT); tapT=setTimeout(()=>taps=0,2000); }
     </script>
 </body>
 </html>
