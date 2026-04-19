@@ -115,7 +115,10 @@
                         <input type="tel" id="vPhone" placeholder="Primary Phone" class="input-pro" required>
                         <select id="vSvc" class="input-pro" required>
                             <option value="">Select Service Portfolio</option>
-                            <option value="Windows">Windows Replacement</option>
+                            <option 
+value="Garage">Garage SURVICE(DOOR,ROOF ETC)</option>
+                            <option
+value="Windows">Windows Replacement</option>
                             <option value="Roofing">Roofing Installation</option>
                             <option value="Solar">Solar Power Matrix</option>
                             <option value="Kitchen">Interior Remodeling</option>
