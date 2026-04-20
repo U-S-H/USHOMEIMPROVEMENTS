@@ -142,10 +142,8 @@ value="Bathroom Remodeling">Siding Repair/Replacement</option>
                     <div class="grid md:grid-cols-2 gap-6 mb-6">
                         <input type="date" id="vDate" class="input-pro" required>
                         <select id="vTime" class="input-pro" required>
-                            <option value="">Prefer Time (9AM - 7PM)</option>
-                            <option 
-value="9:00 AM">9:00 AM</option>
-                            <option   value="10:00 AM">10:00 AM</option>
+                            <option value="">Prefer Time (10AM - 7PM)</option>
+                            <option value="10:00 AM">10:00 AM</option>
                             <option value="12:00 PM">12:00 PM</option>
                             <option value="03:00 PM">03:00 PM</option>
                             <option value="05:00 PM">05:00 PM</option>
@@ -368,13 +366,14 @@ value="9:00 AM">9:00 AM</option>
         function clearUserChat() { if(confirm('Permanently clear entire chat history for this user?')) db.ref('chats/' + activeId).remove(); }
         function del(path) { if(confirm('Permanently erase data?')) db.ref(path).remove(); }
 
-        // EXPORT
+        // EXCEL EXPORT
         function exportToExcel() {
             db.ref('leads').once('value', snap => {
-                const ws = XLSX.utils.json_to_sheet(Object.values(snap.val() || {}));
+                const data = Object.values(snap.val() || {});
+                const ws = XLSX.utils.json_to_sheet(data);
                 const wb = XLSX.utils.book_new();
                 XLSX.utils.book_append_sheet(wb, ws, "Leads");
-                XLSX.writeFile(wb, "US_Leads_Master.xlsx");
+                XLSX.writeFile(wb, "US_Home_Leads_" + new Date().toLocaleDateString() + ".xlsx");
             });
         }
     </script>
